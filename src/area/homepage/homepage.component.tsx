@@ -27,10 +27,10 @@ import {
 import styles from './homepage.module.css';
 
 function Homepage() {
-  const navItems = [
-    {title: "About", url: "/about"},
-    {title: "Contact", url: "/contact"},
-  ];
+  // const navItems = [
+  //   {title: "About", url: "/about"},
+  //   {title: "Contact", url: "/contact"},
+  // ];
 
   const whyItems = [
     {text1: "Quality", text2: "Consistency", image: medalImage},
@@ -39,11 +39,11 @@ function Homepage() {
   ];
 
   const successStoriesItems = [
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."}
+    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
+    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
+    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
+    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
+    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."}
   ];
 
   const faqItems = [
@@ -79,13 +79,13 @@ function Homepage() {
       <div className={styles.topNav}>
         <img src={logoImage} alt="kramank logo" srcSet="" className={styles.logo}/>
         <div className={styles.navItems}>
-          {navItems.map((navItem) => (
+          {/* {navItems.map((navItem) => (
             <div className={styles.navItem}>
               {
                 navItem.title
               }
             </div>
-          ))}
+          ))} */}
           <div className={styles.navItem}>
             <Button>
               Login / Signup
@@ -140,7 +140,7 @@ function Homepage() {
       </div>
       <div className={styles.faqContainer}>
         <div className={styles.faqTitle}>
-          Frequently Asked Questions
+          FAQs
         </div>
         <Accordion type="single" collapsible className={styles.faqListContainer}>
           {
@@ -156,45 +156,47 @@ function Homepage() {
         </Accordion>
       </div>
       <div className={styles.footerContainer}>
-          <div>
-            <img src={logoWithoutBackgroungImage} alt="logo" className={styles.footerLogo}/>
-            <div className={styles.contactInfo}>
-              <div className={styles.address}>
-                129, Street Name, Locality Name, City Name - Pincode
+          <div className={styles.footerMain}>
+            <div>
+              <img src={logoWithoutBackgroungImage} alt="logo" className={styles.footerLogo}/>
+              <div className={styles.contactInfo}>
+                <div className={styles.address}>
+                  129, Street Name, Locality Name, City Name - Pincode
+                </div>
+                <span>
+                  <img src={phoneImage} alt="phone" />
+                  +91 1234567890
+                </span>
+                <span>
+                  <img src={emailImage} alt="phone" />
+                  test@test.com
+                </span>
               </div>
-              <span>
-                <img src={phoneImage} alt="phone" />
-                +91 1234567890
-              </span>
-              <span>
-                <img src={emailImage} alt="phone" />
-                test@test.com
-              </span>
+            </div>
+            <div className={styles.followContainer}>
+              Follow us on
+              <ul>
+                <li className={styles.followItem}>
+                  <img src={facebookImage} alt="facebook" /> 
+                  <span>Facebook</span>
+                </li>
+                <li className={styles.followItem}>
+                  <img src={xImage} alt="X" /> 
+                  <span>X (Formerly Twitter)</span>
+                </li>
+                <li className={styles.followItem}>
+                  <img src={instagramImage} alt="Instagram" /> 
+                  <span>Instagram</span>
+                </li>
+                <li className={styles.followItem}>
+                  <img src={linkedinImage} alt="LinkedIn" /> 
+                  <span>LinkedIn</span>
+                </li>
+              </ul>
             </div>
           </div>
           <div className={styles.copyright}>
             &copy; Copyright All Rights Reserved   
-          </div>
-          <div className={styles.followContainer}>
-            Follow us on
-            <ul>
-              <li className={styles.followItem}>
-                <img src={facebookImage} alt="facebook" /> 
-                Facebook
-              </li>
-              <li className={styles.followItem}>
-                <img src={xImage} alt="X" /> 
-                X (Formerly Twitter)
-              </li>
-              <li className={styles.followItem}>
-                <img src={instagramImage} alt="Instagram" /> 
-                Instagram
-              </li>
-              <li className={styles.followItem}>
-                <img src={linkedinImage} alt="LinkedIn" /> 
-                LinkedIn
-              </li>
-            </ul>
           </div>
       </div>
     </>
