@@ -9,7 +9,7 @@ import emailImage from '../../assets/email.png';
 import facebookImage from '../../assets/facebook.png';
 import xImage from '../../assets/twitter.png';
 import instagramImage from '../../assets/instagram.png';
-import linkedinImage from '../../assets/linkedin.png';
+import linkedInImage from '../../assets/linkedin.png';
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -24,17 +24,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import styles from './homepage.module.css';
+import { Card } from '@/components/ui/card';
 
 function Homepage() {
-  // const navItems = [
-  //   {title: "About", url: "/about"},
-  //   {title: "Contact", url: "/contact"},
-  // ];
 
   const whyItems = [
     {text1: "Quality", text2: "Consistency", image: medalImage},
     {text1: "Single Vendor", text2: "Marketplace", image: vendorImage},
+    {text1: "Next Day", text2: "Delivery", image: fastDeliveryImage},
     {text1: "Next Day", text2: "Delivery", image: fastDeliveryImage},
   ];
 
@@ -74,78 +71,99 @@ function Homepage() {
     }
   ]
 
+  const followItems = [
+    {
+      id: 1,
+      name: "Facebook",
+      image: facebookImage,
+    },
+    {
+      id: 2,
+      name: "X (Formerly Twitter)",
+      image: xImage,
+    },
+    {
+      id: 3,
+      name: "Instagram",
+      image: instagramImage,
+    },
+    {
+      id: 4,
+      name: "LinkedIn",
+      image: linkedInImage,
+    },
+  ];
+
   return (
     <>
-      <div className={styles.topNav}>
-        <img src={logoImage} alt="kramank logo" srcSet="" className={styles.logo}/>
-        <div className={styles.navItems}>
-          {/* {navItems.map((navItem) => (
-            <div className={styles.navItem}>
-              {
-                navItem.title
-              }
-            </div>
-          ))} */}
-          <div className={styles.navItem}>
-            <Button>
-              Login / Signup
-            </Button>
-          </div>
+      <div className="h-20 w-full p-4 fixed top-0 flex items-center justify-between shadow-xl bg-white z-10">
+        <div className="w-48 cursor-pointer">
+          <img src={logoImage} alt="kramank logo" />
+        </div>
+        <Button>
+          Login / Signup
+        </Button>
+      </div>
+      <div className="my-24 flex items-center justify-center relative">
+        <div className="w-11/12 h-[500px] bg-[url('src/assets/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
+          All your corporate needs delivered next day.
+        </div>
+        <div className="h-20 px-5 py-7 absolute -bottom-10 bg-white rounded-3xl shadow-2xl text-lg font-bold flex items-center justify-center">
+          Explore Our Catalog
         </div>
       </div>
-      <div className={styles.artContainer}>
-        <div className={styles.artInfo}>All your corporate needs delivered next day.</div>
-        <button className={styles.orderButton}>
-          Explore Our Catalog
-        </button>
-      </div>
-      <div className={styles.whyContainer}>
-          <div className={styles.whyTitle}>  
+      <div className="pt-6 flex flex-col items-center justify-center">
+          <div className="text-3xl font-bold">  
             Why Choose Kramank?
           </div>
-          <div className={styles.whyItemContainer}>
+          <div className="mt-6 flex flex-col items-center justify-center md:flex-row">
             {
               whyItems.map((whyItem) => (
-                <div className={styles.whyItem}>
-                  <img src={whyItem.image} alt={whyItem.text1}/>
+                <Card className="h-60 w-80 m-5 rounded-3xl shadow-2xl flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300 ease-in-out">
+                  <img src={whyItem.image} alt={whyItem.text1} className="h-20 w-20 m-4"/>
                   <span>{whyItem.text1}</span>
                   <span>{whyItem.text2}</span>
-                </div>
+                </Card>
               ))
             }
           </div>
       </div>
-      <div className={styles.successStoriesContainer}>
-        <div className={styles.sucessStoriesTitle}>
+      <div className="mt-24 flex flex-col items-center justify-center">
+        <div className="text-3xl font-bold">
           Success Stories
         </div>
-        <Carousel className={styles.carousal}>
-          <CarouselContent className={styles.carousalContent}>
+        <Carousel className="w-full sm:w-2/3">
+          <CarouselContent className="px-12">
            {
             successStoriesItems.map((story, index) => (
-              <CarouselItem className={styles.successStoriesItem} key={index}>
-                <img src={story.image} alt="Image" className={styles.storyImage}/>
-                <div className={styles.storyInfo}>
-                  <span>{story.description}</span>
-                  <div>{story.name}</div>
-                  <span>{`${story.bussinessName}, ${story.location}`}</span>
+              <CarouselItem 
+                key={index}
+                className="my-10 p-2 mr-6 shadow-lg rounded-2xl flex flex-col items-center lg:flex-row hover:scale-105 transition-transform duration-300 ease-in-out">
+                <img src={story.image} alt="story" className="h-60 object-fit md:h-full md:w-60 rounded-xl mb-5 lg:m-0"/>
+                <div className="px-6">
+                  <span className="text-sm">{story.description}</span>
+                  <div className='mt-3 text-lg font-bold'>{story.name}</div>
+                  <span className="text-sm">{`${story.bussinessName}, ${story.location}`}</span>
                 </div>
               </CarouselItem>
             ))
            }
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden md:flex"/>
+          <CarouselNext className="hidden md:flex"/>
         </Carousel> 
       </div>
-      <div className={styles.faqContainer}>
-        <div className={styles.faqTitle}>
+      <div className="my-16 flex flex-col items-center justify-center">
+        <div className="text-3xl font-bold mb-6">
           FAQs
         </div>
-        <Accordion type="single" collapsible className={styles.faqListContainer}>
+        <Accordion type="single" collapsible className='w-full md:w-1/2'>
           {
             faqItems.map(item => (
-              <AccordionItem value={`faq-${item.id}`} key={item.id} className={styles.faqItem}>
+              <AccordionItem 
+                value={`faq-${item.id}`} 
+                key={item.id} 
+                className="m-3 px-3 rounded-2xl shadow-md">
                 <AccordionTrigger>{item.question}</AccordionTrigger>
                 <AccordionContent>
                   {item.answer}
@@ -155,48 +173,52 @@ function Homepage() {
           }
         </Accordion>
       </div>
-      <div className={styles.footerContainer}>
-          <div className={styles.footerMain}>
+      <div className="p-4 bg-gray-200/75 flex flex-col items-center justify-center">
+          <div className="mb-10 w-full flex flex-col sm:flex-row items-center justify-between">
             <div>
-              <img src={logoWithoutBackgroungImage} alt="logo" className={styles.footerLogo}/>
-              <div className={styles.contactInfo}>
-                <div className={styles.address}>
+              <img 
+                src={logoWithoutBackgroungImage} 
+                alt="logo" 
+                className="h-16"/>
+              <div className="px-5">
+                <div className="mb-2 w-60">
                   129, Street Name, Locality Name, City Name - Pincode
                 </div>
-                <span>
-                  <img src={phoneImage} alt="phone" />
+                <span className="flex items-center">
+                  <img 
+                    src={phoneImage} 
+                    alt="phone" 
+                    className="h-4 mr-4" />
                   +91 1234567890
                 </span>
-                <span>
-                  <img src={emailImage} alt="phone" />
+                <span className="flex items-center">
+                  <img 
+                    src={emailImage} 
+                    alt="phone"
+                    className="h-4 mr-4" />
                   test@test.com
                 </span>
               </div>
             </div>
-            <div className={styles.followContainer}>
+            <div className="pt-10 sm: pt-3 text-xl font-bold flex flex-col items-center sm:items-start">
               Follow us on
-              <ul>
-                <li className={styles.followItem}>
-                  <img src={facebookImage} alt="facebook" /> 
-                  <span>Facebook</span>
-                </li>
-                <li className={styles.followItem}>
-                  <img src={xImage} alt="X" /> 
-                  <span>X (Formerly Twitter)</span>
-                </li>
-                <li className={styles.followItem}>
-                  <img src={instagramImage} alt="Instagram" /> 
-                  <span>Instagram</span>
-                </li>
-                <li className={styles.followItem}>
-                  <img src={linkedinImage} alt="LinkedIn" /> 
-                  <span>LinkedIn</span>
-                </li>
+              <ul className='pt-2 flex justify-center sm:block'>
+                {
+                  followItems.map((item) => 
+                    <li key={item.id} className="my-2 flex items-center cursor-pointer" >
+                      <img 
+                        src={item.image} 
+                        alt={item.name} 
+                        className="h-5 mx-2" /> 
+                      <span className="text-base font-normal hidden sm:block">{item.name}</span>
+                    </li>
+                  )
+                }
               </ul>
             </div>
           </div>
-          <div className={styles.copyright}>
-            &copy; Copyright All Rights Reserved   
+          <div>
+            Copyright&copy; All Rights Reserved   
           </div>
       </div>
     </>
