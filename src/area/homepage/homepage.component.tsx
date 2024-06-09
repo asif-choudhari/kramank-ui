@@ -105,7 +105,7 @@ function Homepage() {
         </Button>
       </div>
       <div className="my-24 flex items-center justify-center relative">
-        <div className="w-11/12 h-[500px] bg-[url('src/assets/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
+        <div className="w-11/12 h-[500px] bg-[url('/public/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
           All your corporate needs delivered next day.
         </div>
         <div className="h-20 px-5 py-7 absolute -bottom-10 bg-white rounded-3xl shadow-2xl text-lg font-bold flex items-center justify-center">
