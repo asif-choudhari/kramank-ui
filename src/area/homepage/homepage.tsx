@@ -1,4 +1,10 @@
 import logoImage from '../../assets/logo.png';
+import fruitsImage from '../../assets/fruits.png';
+import juiceImage from '../../assets/juice.png';
+import snacksImage from '../../assets/snacks.png';
+import sweetsImage from '../../assets/sweets.png';
+import essentialsImage from '../../assets/essentials.png';
+import giftsImage from '../../assets/gifts.png';
 import medalImage from '../../assets/medal.png';
 import vendorImage from '../../assets/vendor.png';
 import fastDeliveryImage from '../../assets/fast-delivery.png';
@@ -25,8 +31,38 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Card } from '@/components/ui/card';
+import Autoplay from 'embla-carousel-autoplay';
+import Login from '../login/login';
+import { DialogTrigger } from '@/components/ui/dialog';
+import { Dialog } from '@radix-ui/react-dialog';
 
 function Homepage() {
+  const catalogItems = [
+    {
+      title: "Fresh Fruits",
+      image: fruitsImage, 
+    },
+    {
+      title: "Fresh Juice",
+      image: juiceImage,
+    },
+    {
+      title: "Delicious Snacks",
+      image: snacksImage,
+    },
+    {
+      title: "Sweets & Deserts",
+      image: sweetsImage,
+    },
+    {
+      title: "Daily Essentials",
+      image: essentialsImage,
+    },
+    {
+      title: "Exciting Gifts",
+      image: giftsImage,
+    },
+  ];
 
   const whyItems = [
     {text1: "Quality", text2: "Consistency", image: medalImage},
@@ -95,28 +131,58 @@ function Homepage() {
   ];
 
   return (
-    <>
+    <Dialog>
       <div className="h-20 w-full p-4 fixed top-0 flex items-center justify-between shadow-xl bg-white z-10">
         <div className="w-48 cursor-pointer">
           <img src={logoImage} alt="kramank logo" />
         </div>
-        <Button>
-          Login / Signup
-        </Button>
+        <DialogTrigger>
+          <Button>
+            Login / Signup
+          </Button>
+        </DialogTrigger>
       </div>
-      <div className="my-24 flex items-center justify-center relative">
-        <div className="w-11/12 h-[500px] bg-[url('/public/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
+      <div className="mt-24 mb-20 flex items-center justify-center relative">
+        <div className="w-11/12 h-[400px] md:h-[525px] bg-[url('/public/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
           All your corporate needs delivered next day.
         </div>
         <div className="h-20 px-5 py-7 absolute -bottom-10 bg-white rounded-3xl shadow-2xl text-lg font-bold flex items-center justify-center">
           Explore Our Catalog
         </div>
       </div>
-      <div className="pt-6 flex flex-col items-center justify-center">
+      <div className="flex items-center overflow-hidden pb-20 relative">
+        <div className="flex animate-slide">
+        {
+          catalogItems.map((item) => (
+            <Card className=" mx-5 h-52 w-48 rounded-2xl shadow-2xl flex flex-col items-center justify-around">
+              <img src={item.image} alt={item.title} className='h-40 w-44 rounded-xl'/>
+              <div className="font-bold">
+                {item.title}
+              </div>
+            </Card>
+          ))
+        }
+        </div>
+        <div className="flex animate-slide">
+        {
+          catalogItems.map((item) => (
+            <Card className=" mx-5 h-52 w-48 rounded-2xl shadow-2xl flex flex-col items-center justify-around">
+              <img src={item.image} alt={item.title} className='h-40 w-44 rounded-xl'/>
+              <div className="font-bold">
+                {item.title}
+              </div>
+            </Card>
+          ))
+        }
+        </div>
+        <div className="absolute top-0 left-0 h-52 w-1/12 bg-gradient-to-r from-neutral-50 z-2"/>
+        <div className="absolute top-0 right-0 h-52 w-1/12 bg-gradient-to-l from-neutral-50 z-2"/>
+      </div>
+      <div className="flex flex-col items-center justify-center">
           <div className="text-3xl font-bold">  
             Why Choose Kramank?
           </div>
-          <div className="mt-6 flex flex-col items-center justify-center md:flex-row">
+          <div className="w-11/12 mt-6 flex flex-col items-center justify-center md:flex-row">
             {
               whyItems.map((whyItem) => (
                 <Card className="h-60 w-80 m-5 rounded-3xl shadow-2xl flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300 ease-in-out">
@@ -132,13 +198,23 @@ function Homepage() {
         <div className="text-3xl font-bold">
           Success Stories
         </div>
-        <Carousel className="w-full sm:w-2/3">
+        <Carousel 
+          opts={{
+            loop: true,
+            active: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
+          className="w-full sm:w-2/3">
           <CarouselContent className="px-12">
            {
             successStoriesItems.map((story, index) => (
               <CarouselItem 
                 key={index}
-                className="my-10 p-2 mr-6 shadow-lg rounded-2xl flex flex-col items-center lg:flex-row hover:scale-105 transition-transform duration-300 ease-in-out">
+                className="my-10 p-2 mr-6 shadow-lg rounded-2xl flex flex-col items-center lg:flex-row">
                 <img src={story.image} alt="story" className="h-60 object-fit md:h-full md:w-60 rounded-xl mb-5 lg:m-0"/>
                 <div className="px-6">
                   <span className="text-sm">{story.description}</span>
@@ -221,7 +297,8 @@ function Homepage() {
             Copyright&copy; All Rights Reserved   
           </div>
       </div>
-    </>
+      <Login />
+    </Dialog>
   )
 }
 

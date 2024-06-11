@@ -1,4 +1,4 @@
-import Homepage from './area/homepage/homepage.component';
+import Homepage from './area/homepage/homepage';
 
 function App() {
   return (
