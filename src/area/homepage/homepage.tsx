@@ -45,7 +45,7 @@ function Homepage() {
       </div>
       <div className="mt-24 mb-20 flex items-center justify-center relative">
         <div className="w-11/12 h-[400px] md:h-[525px] bg-[url('/public/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
-          A single Vendor solution for your business needs !
+          A single Vendor solution for your business needs!
         </div>
         <div
           onClick={() => {
