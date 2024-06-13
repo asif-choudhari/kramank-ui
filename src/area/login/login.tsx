@@ -22,7 +22,7 @@ function Login() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center sm:bg-gradient-to-r from-cyan-500 to-blue-500">
-      <div className="bg-white w-full sm:w-8/12 md:w-1/2 lg:w-[512px] h-auto pl-10 pr-16 pb-10 sm:rounded-2xl sm:shadow-2xl flex flex-col">
+      <div className="bg-white h-11/12 w-full sm:w-8/12 md:w-1/2 lg:w-[512px] pl-10 pr-16 pb-10 sm:rounded-2xl sm:shadow-2xl flex flex-col">
         <img 
           src={logo} 
           alt="logo" 
