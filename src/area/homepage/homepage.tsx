@@ -1,21 +1,14 @@
 import logoImage from '../../assets/logo.png';
-import fruitsImage from '../../assets/fruits.png';
-import juiceImage from '../../assets/juice.png';
-import snacksImage from '../../assets/snacks.png';
-import sweetsImage from '../../assets/sweets.png';
-import essentialsImage from '../../assets/essentials.png';
-import giftsImage from '../../assets/gifts.png';
-import medalImage from '../../assets/medal.png';
-import vendorImage from '../../assets/vendor.png';
-import fastDeliveryImage from '../../assets/fast-delivery.png';
-import foodImage from '../../assets/food.png';
 import logoWithoutBackgroungImage from '../../assets/logo-no-bg.png';
+import { 
+  catalogItems, 
+  whyItems, 
+  successStoriesItems, 
+  faqItems,
+  followItems, 
+ } from './static-data';
 import phoneImage from '../../assets/telephone.png';
 import emailImage from '../../assets/email.png';
-import facebookImage from '../../assets/facebook.png';
-import xImage from '../../assets/twitter.png';
-import instagramImage from '../../assets/instagram.png';
-import linkedInImage from '../../assets/linkedin.png';
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -32,121 +25,33 @@ import {
 } from "@/components/ui/accordion"
 import { Card } from '@/components/ui/card';
 import Autoplay from 'embla-carousel-autoplay';
-import Login from '../login/login';
-import { DialogTrigger } from '@/components/ui/dialog';
-import { Dialog } from '@radix-ui/react-dialog';
+import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '@/routes/paths';
 
 function Homepage() {
-  const catalogItems = [
-    {
-      title: "Fresh Fruits",
-      image: fruitsImage, 
-    },
-    {
-      title: "Fresh Juice",
-      image: juiceImage,
-    },
-    {
-      title: "Delicious Snacks",
-      image: snacksImage,
-    },
-    {
-      title: "Sweets & Deserts",
-      image: sweetsImage,
-    },
-    {
-      title: "Daily Essentials",
-      image: essentialsImage,
-    },
-    {
-      title: "Exciting Gifts",
-      image: giftsImage,
-    },
-  ];
-
-  const whyItems = [
-    {text1: "Quality", text2: "Consistency", image: medalImage},
-    {text1: "Single Vendor", text2: "Marketplace", image: vendorImage},
-    {text1: "Next Day", text2: "Delivery", image: fastDeliveryImage},
-    {text1: "Next Day", text2: "Delivery", image: fastDeliveryImage},
-  ];
-
-  const successStoriesItems = [
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."},
-    {image: foodImage, name: "Customer Name", bussinessName: "Bussiness Name", location:"Bangalore, India",  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien."}
-  ];
-
-  const faqItems = [
-    {
-      id: 1,
-      question: "Why is KRAMANK good for my company's operations?",
-      answer: "We provide access to a large catalogue of products that you can search / order quickly. A single vendor for all the products companies need, we can fulfill them all. Our prices are competitive and our deliveries are on time."
-    },
-    {
-      id: 2,
-      question: "I run a Company. Can I purchase from Kramank?",
-      answer: "Absolutely. Kramank is open to anyone that runs a Company, regardless of whether you operate from a single branch or a 100’s of branches(or something in between)."
-    },
-    {
-      id: 3,
-      question: "What modes of payment are accepted on Kramank?",
-      answer: "We accept online payments through netbanking, credit cards, debit cards, and UPI."
-    },
-    {
-      id: 4,
-      question: "What do I do in the event that there are issues with incorrect billing or delivery?",
-      answer: "In the event of faulty delivery or any billing related issues, please get in touch with our support team via help@kramank.com and we'll help you resolve the problem at earliest."
-    },
-    {
-      id: 5,
-      question: "Can I return an item once it has been purchased?",
-      answer: "Any items you want to return (due to quality concerns or anything else) need to be returned at the time of delivery. We do not accept returns once the item has been claimed by the restaurant."
-    }
-  ]
-
-  const followItems = [
-    {
-      id: 1,
-      name: "Facebook",
-      image: facebookImage,
-    },
-    {
-      id: 2,
-      name: "X (Formerly Twitter)",
-      image: xImage,
-    },
-    {
-      id: 3,
-      name: "Instagram",
-      image: instagramImage,
-    },
-    {
-      id: 4,
-      name: "LinkedIn",
-      image: linkedInImage,
-    },
-  ];
+  const navigate = useNavigate();
 
   return (
-    <Dialog>
+    <>
       <div className="h-20 w-full p-4 fixed top-0 flex items-center justify-between shadow-xl bg-white z-10">
         <div className="w-48 cursor-pointer">
           <img src={logoImage} alt="kramank logo" />
         </div>
-        <DialogTrigger>
-          <Button>
-            Login / Signup
-          </Button>
-        </DialogTrigger>
+        <Button className="bg-black" onClick={() => {
+          navigate(RoutePath.Login);
+        }}>
+          Login / Signup
+        </Button>
       </div>
       <div className="mt-24 mb-20 flex items-center justify-center relative">
         <div className="w-11/12 h-[400px] md:h-[525px] bg-[url('/public/homeBG.png')] rounded-3xl shadow-2xl flex justify-center items-center text-white text-3xl text-center font-bold">
-          All your corporate needs delivered next day.
+          A single Vendor solution for your business needs !
         </div>
-        <div className="h-20 px-5 py-7 absolute -bottom-10 bg-white rounded-3xl shadow-2xl text-lg font-bold flex items-center justify-center">
+        <div
+          onClick={() => {
+            navigate(RoutePath.Login)
+          }} 
+          className="h-20 px-5 py-7 absolute -bottom-10 bg-white rounded-3xl shadow-2xl text-lg font-bold flex items-center justify-center hover:scale-105 cursor-pointer transition-transform duration-300 ease-in-out">
           Explore Our Catalog
         </div>
       </div>
@@ -166,8 +71,8 @@ function Homepage() {
         <div className="flex animate-slide">
         {
           catalogItems.map((item) => (
-            <Card className=" mx-5 h-52 w-48 rounded-2xl shadow-2xl flex flex-col items-center justify-around">
-              <img src={item.image} alt={item.title} className='h-40 w-44 rounded-xl'/>
+            <Card className=" mx-5 h-52 w-48 rounded-xl shadow-2xl flex flex-col items-center justify-around">
+              <img src={item.image} alt={item.title} className="h-40 w-44 rounded-lg"/>
               <div className="font-bold">
                 {item.title}
               </div>
@@ -185,7 +90,7 @@ function Homepage() {
           <div className="w-11/12 mt-6 flex flex-col items-center justify-center md:flex-row">
             {
               whyItems.map((whyItem) => (
-                <Card className="h-60 w-80 m-5 rounded-3xl shadow-2xl flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300 ease-in-out">
+                <Card className="h-60 w-80 m-5 rounded-2xl shadow-2xl flex flex-col items-center justify-center hover:scale-105 transition-transform duration-300 ease-in-out">
                   <img src={whyItem.image} alt={whyItem.text1} className="h-20 w-20 m-4"/>
                   <span>{whyItem.text1}</span>
                   <span>{whyItem.text2}</span>
@@ -250,7 +155,7 @@ function Homepage() {
         </Accordion>
       </div>
       <div className="p-4 bg-gray-200/75 flex flex-col items-center justify-center">
-          <div className="mb-10 w-full flex flex-col sm:flex-row items-center justify-between">
+          <div className="mb-10 lg:px-24 w-full flex flex-col sm:flex-row items-center justify-between">
             <div>
               <img 
                 src={logoWithoutBackgroungImage} 
@@ -297,8 +202,7 @@ function Homepage() {
             Copyright&copy; All Rights Reserved   
           </div>
       </div>
-      <Login />
-    </Dialog>
+    </>
   )
 }
 
