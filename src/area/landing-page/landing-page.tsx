@@ -28,7 +28,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '@/routes/paths';
 
-function Homepage() {
+function LandingPage() {
   const navigate = useNavigate();
 
   return (
@@ -206,4 +206,4 @@ function Homepage() {
   )
 }
 
-export default Homepage;
+export default LandingPage;
