@@ -38,7 +38,7 @@ function Login() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center sm:bg-slate-200">
-      <div className="bg-white h-11/12 w-full sm:w-8/12 md:w-1/2 lg:w-[512px] pl-10 pr-16 pb-10 sm:rounded-2xl sm:shadow-2xl flex flex-col">
+      <div className="bg-white h-full w-full sm:w-8/12 md:w-1/2 lg:w-[512px] pl-10 pr-16 pb-10 sm:rounded-2xl sm:shadow-2xl flex flex-col">
         <img src={logo} alt="logo" className="h-18 w-72 my-4" />
         <div className="flex flex-col pl-5">
           <span className="text-2xl">Login</span>
