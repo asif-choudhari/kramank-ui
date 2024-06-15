@@ -127,7 +127,10 @@ function Login() {
         </form>
         <div className="pl-5">
           <span>{`Dont have an account? `}</span>
-          <Link to={RoutePath.Signup} className="text-blue-600 hover:underline">
+          <Link
+            to={RoutePath.Waitlist}
+            className="text-blue-600 hover:underline"
+          >
             Register here
           </Link>
         </div>

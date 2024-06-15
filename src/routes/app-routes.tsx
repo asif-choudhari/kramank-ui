@@ -9,12 +9,14 @@ import Report from "@/area/dashboard/report/report";
 import Invoice from "@/area/dashboard/invoice/invoice";
 import RaiseQuery from "@/area/dashboard/raise-query/raise-query";
 import PrivateRoute from "./private-route";
+import Waitlist from "@/area/waitlist/waitlist";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route path="" Component={LandingPage} />
       <Route path="login" Component={Login} />
+      <Route path="waitlist" Component={Waitlist} />
       <Route element={<PrivateRoute />}>
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
