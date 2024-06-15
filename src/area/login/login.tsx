@@ -4,36 +4,71 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RoutePath } from "@/routes/paths";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUserThunk } from "./state/login.slice";
+import {
+  authorizeUserThunk,
+  clearError,
+  loginUserThunk,
+} from "./state/login.slice";
 import { AppDispatch } from "@/store";
-import { errorSelector } from "./state/login.selector";
+import { errorSelector, tokenSelector } from "./state/login.selector";
 import { toast, Toaster } from "sonner";
+import { useCookies } from "react-cookie";
 
 function Login() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const [cookies, setCookies] = useCookies(["token"]);
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isRemeberCheckboxChecked, setIsRemeberCheckboxChecked] =
+  const [isShowPasswordCheckboxChecked, setIsShowPasswordCheckboxChecked] =
     useState<boolean>(false);
 
   const error = useSelector(errorSelector);
+  const token = useSelector(tokenSelector);
 
-  const handleCheckboxClick = () => {
-    setIsRemeberCheckboxChecked((previous) => !previous);
-  };
+  useEffect(() => {
+    if (cookies.token) {
+      dispatch(authorizeUserThunk(cookies.token));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
-  const handleLogin = async (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    dispatch(loginUserThunk({ email, password }));
-    if (error && error.length > 0) {
+  useEffect(() => {
+    if (error.length > 0 && error !== "Invalid token") {
       toast.error("Error:", {
         description: error,
       });
     }
+  }, [error]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (token.length > 0 && !cookies.token) {
+      setCookies("token", token, { maxAge: 60 * 60 * 3 });
+      navigate(RoutePath.DashboardHome);
+    }
+  }, [cookies.token, navigate, setCookies, token]);
+
+  if (token.length > 0) {
+    return <Navigate to={RoutePath.DashboardHome} />;
+  }
+
+  const handleCheckboxClick = () => {
+    setIsShowPasswordCheckboxChecked((previous) => !previous);
+  };
+
+  const handleLogin = (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(loginUserThunk({ email, password }));
   };
 
   return (
@@ -58,9 +93,10 @@ function Login() {
           <div className="py-3">
             <Label htmlFor="password">Password</Label>
             <Input
-              type="password"
+              type={isShowPasswordCheckboxChecked ? "text" : "password"}
               id="password"
               autoComplete="true"
+              minLength={3}
               className="mt-2"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -69,7 +105,7 @@ function Login() {
           <div className="py-3 items-top flex space-x-2">
             <Checkbox
               id="remember"
-              checked={isRemeberCheckboxChecked}
+              checked={isShowPasswordCheckboxChecked}
               onCheckedChange={handleCheckboxClick}
             />
             <div className="grid gap-1.5 leading-none">
@@ -77,11 +113,15 @@ function Login() {
                 htmlFor="remember"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
-                Remember me
+                Show Password
               </label>
             </div>
           </div>
-          <Button type="submit" className="mt-5 w-full">
+          <Button
+            type="submit"
+            disabled={email === "" || password === ""}
+            className="mt-5 w-full"
+          >
             Log In
           </Button>
         </form>

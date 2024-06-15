@@ -8,20 +8,21 @@ import Budget from "@/area/dashboard/budget/budget";
 import Report from "@/area/dashboard/report/report";
 import Invoice from "@/area/dashboard/invoice/invoice";
 import RaiseQuery from "@/area/dashboard/raise-query/raise-query";
+import PrivateRoute from "./private-route";
 
 function AppRoutes() {
   return (
     <Routes>
       <Route path="" Component={LandingPage} />
       <Route path="login" Component={Login} />
-      <Route>
-        <Route path="dashboard" Component={Dashboard} >
-          <Route path="home" Component={Home} />
-          <Route path="admin-branch" Component={AdminBranch} />
-          <Route path="budget" Component={Budget} />
-          <Route path="report" Component={Report} />
-          <Route path="invoice" Component={Invoice} />
-          <Route path="raise-query" Component={RaiseQuery} />
+      <Route element={<PrivateRoute />}>
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route path="home" element={<Home />} />
+          <Route path="admin-branch" element={<AdminBranch />} />
+          <Route path="budget" element={<Budget />} />
+          <Route path="report" element={<Report />} />
+          <Route path="invoice" element={<Invoice />} />
+          <Route path="raise-query" element={<RaiseQuery />} />
         </Route>
       </Route>
     </Routes>

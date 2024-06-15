@@ -1,16 +1,20 @@
-export interface User {
+export type User = {
   firstName: string;
   lastName: string;
   email: string;
-}
+};
 
-export interface LoginPayload {
+export type LoginPayload = {
   email: string;
   password: string;
-}
+};
 
-export interface LoginResponse {
+export type AuthorizePayload = {
+  token: string;
+};
+
+export type AuthResponse = {
   user: User;
   token: string;
   error: string;
-}
+};

@@ -17,7 +17,7 @@ function SideBar() {
   }, [location.pathname]);
 
   return (
-    <div className="w-60 h-screen p-4 flex flex-col items-center shadow-xl z-5">
+    <div className="w-56 h-screen p-4 flex flex-col items-center shadow-xl z-5">
       <div className="w-full">
         <Button
           onClick={() => {
@@ -38,7 +38,9 @@ function SideBar() {
               setCurrentTab(sidebarNavItem.title);
             }}
             className={`my-4 p-2 h-10 cursor-pointer rounded-md ${
-              sidebarNavItem.path.endsWith(currentTab) ? "bg-slate-200" : "bg-none"
+              sidebarNavItem.path.endsWith(currentTab)
+                ? "bg-slate-200"
+                : "bg-none"
             }`}
           >
             {sidebarNavItem.title}
