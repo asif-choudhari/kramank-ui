@@ -38,7 +38,7 @@ function Login() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (error.length > 0 && error !== "Invalid token") {
+    if (error?.length > 0 && error !== "Invalid token") {
       toast.error("Error:", {
         description: error,
       });
@@ -52,13 +52,13 @@ function Login() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (token.length > 0 && !cookies.token) {
+    if (token?.length > 0 && !cookies.token) {
       setCookies("token", token, { maxAge: 60 * 60 * 3 });
       navigate(RoutePath.DashboardHome);
     }
   }, [cookies.token, navigate, setCookies, token]);
 
-  if (token.length > 0) {
+  if (token?.length > 0) {
     return <Navigate to={RoutePath.DashboardHome} />;
   }
 
