@@ -14,7 +14,7 @@ function Dashboard() {
   }, [location.pathname, navigate]);
 
   return (
-    <div className="h-svh w-svw flex bg-slate-100">
+    <div className="flex h-full w-full">
       <SideBar />
       <Outlet />
     </div>

@@ -2,12 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { authorizeUserApi, loginUserApi } from "../api/login.api";
 import {
   LoginPayload,
-  AuthResponse,
+  AuthorizeApiResponse,
   User,
   AuthorizePayload,
+  LoginApiResponse,
 } from "../login.types";
+import { Cookies } from "react-cookie";
 
-export const loginUserThunk = createAsyncThunk<AuthResponse, LoginPayload>(
+const cookies = new Cookies(null, { path: "/" });
+
+export const loginUserThunk = createAsyncThunk<LoginApiResponse, LoginPayload>(
   "login/loginUser",
   async ({ email, password }) => {
     const response = await loginUserApi(email, password);
@@ -16,9 +20,10 @@ export const loginUserThunk = createAsyncThunk<AuthResponse, LoginPayload>(
 );
 
 export const authorizeUserThunk = createAsyncThunk<
-  AuthResponse,
+  AuthorizeApiResponse,
   AuthorizePayload
 >("login/authorizeUser", async ({ token }) => {
+  console.log(token, "thunk");
   const response = await authorizeUserApi(token);
   return response;
 });
@@ -48,8 +53,17 @@ const loginSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
-    clearError: (state) => {
+    resetError: (state) => {
       state.error = "";
+    },
+    resetLoginSlice: (state) => {
+      state.user.email = "";
+      state.user.firstName = "";
+      state.user.lastName = "";
+      state.status = "idle";
+      state.error = "";
+      state.token = "";
+      cookies.remove("token");
     },
   },
   extraReducers: (builder) => {
@@ -63,6 +77,7 @@ const loginSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.error = action.payload.error;
+        cookies.set("token", action.payload.token);
       })
       .addCase(loginUserThunk.rejected, (state) => {
         state.status = "failed";
@@ -73,15 +88,18 @@ const loginSlice = createSlice({
       })
       .addCase(authorizeUserThunk.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-        state.error = action.payload.error;
+        state.user.firstName = action.payload.firstName;
+        state.user.lastName = action.payload.lastName;
+        state.user.email = action.payload.email;
+        state.error = "";
+        state.token = cookies.get("token");
       })
       .addCase(authorizeUserThunk.rejected, (state) => {
         state.status = "failed";
+        state.token = "";
       });
   },
 });
 
-export const { setToken, clearError } = loginSlice.actions;
+export const { setToken, resetError, resetLoginSlice } = loginSlice.actions;
 export default loginSlice.reducer;

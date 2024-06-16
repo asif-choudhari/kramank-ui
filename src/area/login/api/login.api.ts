@@ -13,7 +13,7 @@ export const loginUserApi = async (email: string, password: string) => {
 
 export const authorizeUserApi = async (token: string) => {
   const { data } = await axios.get(
-    `${import.meta.env.VITE_API_URL}/auth/login`,
+    `${import.meta.env.VITE_API_URL}/auth/authorize`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

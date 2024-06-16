@@ -10,6 +10,7 @@ import Invoice from "@/area/dashboard/invoice/invoice";
 import RaiseQuery from "@/area/dashboard/raise-query/raise-query";
 import PrivateRoute from "./private-route";
 import Waitlist from "@/area/waitlist/waitlist";
+import Products from "@/area/products/products";
 
 function AppRoutes() {
   return (
@@ -18,6 +19,7 @@ function AppRoutes() {
       <Route path="login" Component={Login} />
       <Route path="waitlist" Component={Waitlist} />
       <Route element={<PrivateRoute />}>
+        <Route path="products" element={<Products />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="admin-branch" element={<AdminBranch />} />

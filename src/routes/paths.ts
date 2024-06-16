@@ -2,6 +2,7 @@ export const RoutePath = {
   Home: "/",
   Login: "/login",
   Waitlist: "/waitlist",
+  Products: "/products",
   DashboardHome: "/dashboard/home",
   DashboardAdminAndBranch: "/dashboard/admin-branch",
   DashboarBudget: "/dashboard/budget",

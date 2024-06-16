@@ -13,8 +13,14 @@ export type AuthorizePayload = {
   token: string;
 };
 
-export type AuthResponse = {
+export type LoginApiResponse = {
   user: User;
   token: string;
   error: string;
+};
+
+export type AuthorizeApiResponse = {
+  firstName: string;
+  lastName: string;
+  email: string;
 };

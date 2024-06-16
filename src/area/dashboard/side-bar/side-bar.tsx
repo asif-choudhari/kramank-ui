@@ -57,10 +57,10 @@ function SideBar() {
   }, [location.pathname]);
 
   return (
-    <div className="h-svw w-14 md:w-60 m-4 p-4 flex flex-col items-center shadow-all-sides rounded-lg md:rounded-2xl bg-white z-5">
+    <div className="h-auto w-14 md:w-60 p-4 flex flex-col items-center shadow-all-sides rounded-lg md:rounded-2xl bg-white z-5">
       <Button
         onClick={() => {
-          navigate(RoutePath.Login);
+          navigate(RoutePath.Products);
         }}
         className="rounded-lg bg-white text-stone-900 md:bg-stone-900 md:text-white"
       >
@@ -71,14 +71,13 @@ function SideBar() {
       <div className="w-14 p-2 md:p-0 md:w-full">
         {sidebarNavItems.map((sidebarNavItem) => (
           <div
+            key={sidebarNavItem.title}
             onClick={() => {
               navigate(sidebarNavItem.path);
               setCurrentTab(sidebarNavItem.title);
             }}
             className={`my-4 md:p-2 h-10 w-full flex items-center justify-center md:justify-start cursor-pointer rounded-md inline-block ${
-              sidebarNavItem.path.endsWith(currentTab)
-                ? "bg-slate-100"
-                : "bg-none"
+              sidebarNavItem.path.includes(currentTab) ? "bg-slate-100" : ""
             }`}
           >
             <span className="text-center">{sidebarNavItem.icon}</span>

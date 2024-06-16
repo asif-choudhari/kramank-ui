@@ -5,11 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RoutePath } from "@/routes/paths";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   authorizeUserThunk,
-  clearError,
+  resetError,
   loginUserThunk,
 } from "./state/login.slice";
 import { AppDispatch } from "@/store";
@@ -23,8 +23,7 @@ import { useCookies } from "react-cookie";
 
 function Login() {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies(["token"]);
+  const [cookies] = useCookies(["token"]);
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -37,7 +36,7 @@ function Login() {
 
   useEffect(() => {
     if (cookies.token) {
-      dispatch(authorizeUserThunk(cookies.token));
+      dispatch(authorizeUserThunk({ token: cookies.token }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -52,19 +51,12 @@ function Login() {
 
   useEffect(() => {
     return () => {
-      dispatch(clearError());
+      dispatch(resetError());
     };
   }, [dispatch]);
 
-  useEffect(() => {
-    if (token?.length > 0 && !cookies.token) {
-      setCookies("token", token, { maxAge: 60 * 60 * 3 });
-      navigate(RoutePath.DashboardHome);
-    }
-  }, [cookies.token, navigate, setCookies, token]);
-
-  if (token?.length > 0) {
-    return <Navigate to={RoutePath.DashboardHome} />;
+  if (token.length > 0) {
+    return <Navigate to={RoutePath.Products} />;
   }
 
   const handleCheckboxClick = () => {
