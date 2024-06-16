@@ -41,7 +41,7 @@ function Login() {
   }, [cookies.token, dispatch]);
 
   useEffect(() => {
-    if (error?.length > 0 && error !== "Invalid token") {
+    if (error && error !== "Invalid token") {
       toast.error("Error:", {
         description: error,
       });
@@ -54,7 +54,7 @@ function Login() {
     };
   }, [dispatch]);
 
-  if (token.length > 0) {
+  if (token) {
     return <Navigate to={RoutePath.Products} />;
   }
 
