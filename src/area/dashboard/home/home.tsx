@@ -21,6 +21,19 @@ const getChartWidth = (): number => {
   return 300; // lg and above
 };
 
+const data = [
+  { id: 0, value: 500, label: "Used Amount" },
+  { id: 1, value: 250, label: "Unused Amount" },
+];
+
+const total = data.map((item) => item.value).reduce((a, b) => a + b, 0);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getArcLabel = (params: any) => {
+  const percent = params.value / total;
+  return `${(percent * 100).toFixed(0)}%`;
+};
+
 function Home() {
   const rankData = [
     { branch: "New Delhi", amount: 5000 },
@@ -37,10 +50,12 @@ function Home() {
         <PieChart
           series={[
             {
-              data: [
-                { id: 0, value: 500, label: "Used Amount" },
-                { id: 1, value: 250, label: "Unused Amount" },
-              ],
+              data,
+              innerRadius: 40,
+              outerRadius: 100,
+              paddingAngle: 5,
+              cornerRadius: 5,
+              arcLabel: getArcLabel,
             },
           ]}
           width={getChartWidth()}
