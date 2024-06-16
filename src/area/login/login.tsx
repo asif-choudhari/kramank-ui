@@ -38,8 +38,7 @@ function Login() {
     if (cookies.token) {
       dispatch(authorizeUserThunk({ token: cookies.token }));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [cookies.token, dispatch]);
 
   useEffect(() => {
     if (error?.length > 0 && error !== "Invalid token") {
