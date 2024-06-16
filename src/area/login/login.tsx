@@ -13,7 +13,11 @@ import {
   loginUserThunk,
 } from "./state/login.slice";
 import { AppDispatch } from "@/store";
-import { errorSelector, tokenSelector } from "./state/login.selector";
+import {
+  errorSelector,
+  statusSelector,
+  tokenSelector,
+} from "./state/login.selector";
 import { toast, Toaster } from "sonner";
 import { useCookies } from "react-cookie";
 
@@ -27,6 +31,7 @@ function Login() {
   const [isShowPasswordCheckboxChecked, setIsShowPasswordCheckboxChecked] =
     useState<boolean>(false);
 
+  const status = useSelector(statusSelector);
   const error = useSelector(errorSelector);
   const token = useSelector(tokenSelector);
 
@@ -119,10 +124,10 @@ function Login() {
           </div>
           <Button
             type="submit"
-            disabled={email === "" || password === ""}
+            disabled={email === "" || password === "" || status === "loading"}
             className="mt-5 w-full"
           >
-            Log In
+            {status === "loading" ? "Logging In, Please Wait" : "Log In"}
           </Button>
         </form>
         <div className="pl-5">

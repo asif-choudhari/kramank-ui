@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import SideBar from "./side-bar/side-bar";
-import { Separator } from "@/components/ui/separator";
 import { useEffect } from "react";
 import { RoutePath } from "@/routes/paths";
 
@@ -15,9 +14,8 @@ function Dashboard() {
   }, [location.pathname, navigate]);
 
   return (
-    <div className="h-screen flex">
+    <div className="h-svh w-svw flex bg-slate-100">
       <SideBar />
-      <Separator orientation="vertical" className="mr-8" />
       <Outlet />
     </div>
   );

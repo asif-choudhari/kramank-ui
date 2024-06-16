@@ -1,59 +1,103 @@
-import PieChart from "@/area/common/pie-chart/pie-chart";
-import { PieChartDataType } from "@/area/common/pie-chart/pie-chart.types";
 import branchesImage from "@/assets/branches.png";
 import geographiesImage from "@/assets/geography.png";
 import consumptionImage from "@/assets/consumption.png";
+import { PieChart } from "@mui/x-charts/PieChart";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+const pieChartOtherProps = {
+  legend: { hidden: true },
+};
+
+const getChartWidth = (): number => {
+  if (window.innerWidth < 640) return 200; // sm
+  if (window.innerWidth < 1024) return 250; // md
+  return 300; // lg and above
+};
 
 function Home() {
-  const pieChartData: PieChartDataType[] = [
-    { label: "Unused Amount", value: 400, color: "#FFC470" },
-    { label: "Used Amount", value: 500, color: "#4793AF" },
+  const rankData = [
+    { branch: "New Delhi", amount: 5000 },
+    { branch: "Bangalore", amount: 4000 },
+    { branch: "Mumbai", amount: 3000 },
+    { branch: "Hyderabad", amount: 2000 },
+    { branch: "Kolkata", amount: 1000 },
   ];
 
   return (
-    <div className="h-screen w-[100vw] p-5 grid grid-cols-2 grid-row-2 gap-4">
-      <div className="col-span-1 row-span-2 flex flex-col items-center">
+    <div className="h-svw w-svw py-4 pl-4 pr-8 grid gap-5 grid-cols-1 lg:grid-cols-2 lg:grid-rows-5 bg-slate-100 overflow-y-auto hide-scrollbar">
+      <div className="w-auto p-5 shadow-all-sides rounded-xl flex flex-col items-center bg-white lg:row-span-3">
+        <span className="pt-2 pb-8 text-xl font-bold">Consumption</span>
         <PieChart
-          data={pieChartData}
-          width={250}
+          series={[
+            {
+              data: [
+                { id: 0, value: 500, label: "Used Amount" },
+                { id: 1, value: 250, label: "Unused Amount" },
+              ],
+            },
+          ]}
+          width={getChartWidth()}
           height={250}
-          outerRadius={125}
+          margin={{ right: 5 }}
+          {...pieChartOtherProps}
         />
-        <div className="p-10 flex flex-col justify-center items-start">
-          <div className="py-3 pl-24 flex flex-col text-lg">
-            <span className="font-bold">Average consumption per branch</span>
-            <span>Rs. 20,00,000</span>
-          </div>
-          <div className="py-3 pl-24 flex flex-col text-lg">
-            <span className="font-bold">Total Consumption</span>
-            <span>Rs. 5,00,00,000</span>
-          </div>
+      </div>
+      <div className="w-auto h-full py-8 shadow-all-sides rounded-2xl flex flex-col sm:flex-row items-center justify-evenly shadow-all bg-white lg:row-span-2">
+        <div className="flex flex-col items-center pb-16 sm:pb-0">
+          <img src={branchesImage} alt="branches" className="h-24 w-24" />
+          <span className="pt-5 font-bold">No. of Branches</span>
+          <span className="pt-2">4</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <img src={geographiesImage} alt="branches" className="h-24 w-24" />
+          <span className="pt-5 font-bold">No. of Geographies</span>
+          <span className="pt-2">4 (States)</span>
         </div>
       </div>
-      <div className="col-span-1 row-span-2 h-full flex flex-col justify-center">
-        <div className="pb-20 flex justify-evenly items-center text-lg">
-          <div className="p-5 flex flex-col items-center">
-            <img src={branchesImage} alt="branches" className="h-24 w-24" />
-            <span className="pt-5 font-bold">No. of Branches</span>
-            <span className="pt-2">4</span>
-          </div>
-          <div className="p-5 flex flex-col items-center">
-            <img src={geographiesImage} alt="branches" className="h-24 w-24" />
-            <span className="pt-5 font-bold">No. of Geographies</span>
-            <span className="pt-2">4 (States)</span>
-          </div>
+      <div className="w-auto h-full py-8 shadow-all-sides rounded-2xl flex flex-col items-center justify-center xl:flex-row sm:justify-evenly shadow-all bg-white lg:col-start-1 lg:row-start-4 lg:row-end-6">
+        <div className="flex flex-col items-center pb-12 lg:pb-0 text-lg">
+          <span className="font-bold">Average consumption</span>
+          <span>Rs. 20,00,000</span>
         </div>
-        <div className="p- flex justify-evenly items-center">
-          <img src={consumptionImage} alt="branches" className="h-36 w-36" />
-          <div className="flex flex-col">
-            <span className="font-bold text-xl">Rank of Consumption</span>
-            <span className="my-2">1. New Delhi</span>
-            <span className="my-2">2. Bangalore</span>
-            <span className="my-2">3. Mumbai</span>
-            <span className="my-2">4. Hyderabad</span>
-            <span className="my-2">5. Kolkata</span>
-          </div>
+        <div className="flex flex-col items-center text-lg">
+          <span className="font-bold">Total Consumption</span>
+          <span>Rs. 5,00,00,000</span>
         </div>
+      </div>
+      <div className="w-auto h-full p-10 shadow-all-sides rounded-2xl flex flex-col shadow-all bg-white lg:col-start-2 lg:row-start-3 lg:row-end-6">
+        <div className="pb-8">
+          <img
+            src={consumptionImage}
+            alt="branches"
+            className="h-12 w-12 inline-block"
+          />
+          <span className="px-5 font-bold text-xl">Rank of Consumption</span>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Rank</TableHead>
+              <TableHead>Branch</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rankData.map((rankItem, index) => (
+              <TableRow key={rankItem.branch}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>{rankItem.branch}</TableCell>
+                <TableCell className="text-right">{rankItem.amount}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
