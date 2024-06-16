@@ -10,36 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-const pieChartOtherProps = {
-  margin: { right: 5, bottom: 100 },
-  legend: {
-    hidden: false,
-    position: {
-      horizontal: "middle",
-      vertical: "bottom",
-    },
-  },
-};
-
-const getChartWidth = (): number => {
-  if (window.innerWidth < 640) return 200;
-  if (window.innerWidth < 1024) return 250;
-  return 300;
-};
-
-const data = [
-  { id: 0, value: 500, label: "Used Amount" },
-  { id: 1, value: 250, label: "Unused Amount" },
-];
-
-const total = data.map((item) => item.value).reduce((a, b) => a + b, 0);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getArcLabel = (params: any) => {
-  const percent = params.value / total;
-  return `${(percent * 100).toFixed(0)}%`;
-};
+import { data, getArcLabel, getChartWidth } from "./pie-chart.util";
 
 function Home() {
   const rankData = [
@@ -67,7 +38,15 @@ function Home() {
           ]}
           width={getChartWidth()}
           height={300}
-          {...pieChartOtherProps}
+          margin={{ right: 5, bottom: 100 }}
+          slotProps={{
+            legend: {
+              position: {
+                horizontal: "middle",
+                vertical: "bottom",
+              },
+            },
+          }}
         />
       </div>
       <div className="w-auto h-full py-10 px-5 shadow-all-sides rounded-2xl flex flex-col sm:flex-row items-center justify-evenly shadow-all bg-white lg:row-span-2">
