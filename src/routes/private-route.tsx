@@ -48,7 +48,7 @@ const PrivateRoute = (): React.ReactElement => {
   }
 
   return (
-    <div className="h-dvh w-dvw p-4 bg-slate-100">
+    <div className="h-dvh w-dvw p-4 bg-slate-200">
       <div className={isDashboard ? "hidden" : ""}>
         <TopNav />
       </div>

@@ -61,14 +61,18 @@ function Home() {
           <span className="pt-2">4 (States)</span>
         </div>
       </div>
-      <div className="w-auto py-10 px-5 shadow-all-sides rounded-2xl flex flex-col items-center justify-center xl:flex-row sm:justify-evenly shadow-all bg-white lg:col-start-1 lg:row-start-5 lg:row-end-7">
-        <div className="flex flex-col items-center pb-12 lg:pb-0 text-lg">
-          <span className="font-bold">Average consumption</span>
-          <span>Rs. 20,00,000</span>
+      <div className="w-auto flex flex-col sm:flex-row gap-5 items-center lg:col-start-1 lg:row-start-5 lg:row-end-7">
+        <div className="relative h-52 lg:h-full w-full flex flex-col items-center justify-center shadow-all-sides rounded-xl bg-slate-600 text-white">
+          <span className="font-bold absolute top-5 left-5 text-lg">
+            Average consumption
+          </span>
+          <span className="pt-4 text-3xl">Rs. 20,00,000</span>
         </div>
-        <div className="flex flex-col items-center text-lg">
-          <span className="font-bold">Total Consumption</span>
-          <span>Rs. 5,00,00,000</span>
+        <div className="relative h-52 lg:h-full w-full flex flex-col items-center justify-center shadow-all-sides rounded-xl bg-slate-600 text-white">
+          <span className="font-bold absolute top-5 left-5 text-lg">
+            Total consumption
+          </span>
+          <span className="pt-4 text-3xl">Rs. 5,00,00,000</span>
         </div>
       </div>
       <div className="w-auto h-full py-10 px-5 shadow-all-sides rounded-2xl flex flex-col shadow-all bg-white lg:col-start-2 lg:row-start-3 lg:row-end-7">
@@ -79,7 +83,7 @@ function Home() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Rank</TableHead>
+              <TableHead>Rank</TableHead>
               <TableHead>Branch</TableHead>
               <TableHead className="text-right">Amount</TableHead>
             </TableRow>

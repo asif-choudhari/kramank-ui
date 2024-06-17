@@ -77,7 +77,9 @@ function SideBar() {
               setCurrentTab(sidebarNavItem.title);
             }}
             className={`my-4 md:p-2 h-10 w-full flex items-center justify-center md:justify-start cursor-pointer rounded-md inline-block ${
-              sidebarNavItem.path.includes(currentTab) ? "bg-slate-100" : ""
+              sidebarNavItem.path.includes(currentTab)
+                ? "bg-slate-600 text-white"
+                : ""
             }`}
           >
             <span className="text-center">{sidebarNavItem.icon}</span>

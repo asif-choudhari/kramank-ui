@@ -83,7 +83,9 @@ function Login() {
               id="email"
               className="mt-2"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(event.target.value)
+              }
             />
           </div>
           <div className="py-3">
@@ -95,7 +97,9 @@ function Login() {
               minLength={3}
               className="mt-2"
               value={password}
-              onChange={(event) => setPassword(event.target.value)}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(event.target.value)
+              }
             />
           </div>
           <div className="py-3 items-top flex space-x-2">
