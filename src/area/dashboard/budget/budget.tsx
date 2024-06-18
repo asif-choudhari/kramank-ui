@@ -25,6 +25,7 @@ type BranchBudgetType = {
 };
 
 function Budget() {
+  const [isplanEdited, setIsPlanEdited] = useState<boolean>(false);
   const [distributionType, setDistributionType] = useState<string>("amount");
   const [totalLimit, setTotalLimit] = useState<number>(0);
   const [branchBudgetData, setBranchBudgetData] = useState<BranchBudgetType[]>([
@@ -61,20 +62,19 @@ function Budget() {
     });
 
     setBranchBudgetData(updatedBranchData);
+    setIsPlanEdited(true);
   };
 
   return (
-    <div className="h-full pr-1 pb-4 pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
-      <div className="relative w-auto py-10 px-5 shadow-all-sides rounded-2xl grid grid-cols-7 gap-5 shadow-all bg-white lg:col-start-1 lg:row-start-1 lg:row-end-3">
-        <span className="font-bold absolute top-5 left-5 text-2xl">Wallet</span>
-        <span className="w-full flex justify-center items-center text-3xl lg:col-start-1 lg:col-end-5">
-          &#8377; 2,00,000
-        </span>
-        <div className="w-full flex justify-center items-center lg:col-start-5 lg:col-end-7">
+    <div className="h-full pr-1 pb-4 pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto">
+      <div className="w-full h-48 p-5 shadow-all-sides rounded-2xl bg-white flex flex-col items-center gap-5 lg:col-start-1 lg:row-start-1 lg:row-end-3">
+        <span className="w-full float-left font-bold text-2xl">Wallet</span>
+        <span className="text-3xl">&#8377; 2,00,000</span>
+        <div className="w-1/4">
           <Button className="w-11/12">Recharge</Button>
         </div>
       </div>
-      <div className="w-auto h-auto p-10 shadow-all-sides rounded-2xl flex items-center justify-evenly shadow-all bg-white lg:col-start-1 lg:row-start-3 lg:row-end-7 overflow-x-auto overflow-y-auto hide-scrollbar">
+      <div className="w-auto h-96 p-10 shadow-all-sides rounded-2xl flex items-center justify-evenly bg-white lg:col-start-1 lg:row-start-3 lg:row-end-7 overflow-x-auto overflow-y-auto hide-scrollbar">
         <LineChart
           height={400}
           showArea
@@ -97,35 +97,40 @@ function Budget() {
           yAxisData={[2, 3, 5, 6, 7, 1, 8, 2, 1, 5, 0, 9, 12]}
         />
       </div>
-      <div className="w-auto p-5 shadow-all-sides rounded-2xl flex flex-col shadow-all bg-white lg:col-start-2 lg:row-start-1 lg:row-end-7">
-        <div className="w-full flex justify-between items-center font-bold text-2xl">
+      <div className="w-auto p-5 shadow-all-sides rounded-2xl flex flex-col bg-white lg:col-start-2 lg:row-start-1 lg:row-end-7">
+        <div className="w-full h-10 flex justify-between items-center font-bold text-xl">
           <span>Budget Plan</span>
-          <Button className="w-20">Save</Button>
+          {isplanEdited && <Button className="h-8 w-16">Save</Button>}
         </div>
-        <div className="mt-12 h-[450px] flex flex-col items-center">
-          <div className="flex items-center pb-8">
-            <span className="text-lg font bold pr-5">Distibute By: </span>
-            <Select
-              defaultValue={distributionType}
-              onValueChange={setDistributionType}
-            >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="amount">Amount</SelectItem>
-                <SelectItem value="percentage">Percentage</SelectItem>
-              </SelectContent>
-            </Select>
-            <Input
-              type="number"
-              value={totalLimit}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setTotalLimit(+event.target.value);
-              }}
-              placeholder="Total Amount"
-              className="w-18 h-9 mx-8"
-            />
+        <div className="mt-6 h-[450px] flex flex-col items-center">
+          <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-4 xl:gap-20 lg:items-center pb-8">
+            <div>
+              <span className="text-lg font bold pr-5">Distibute By: </span>
+              <Select
+                defaultValue={distributionType}
+                onValueChange={setDistributionType}
+              >
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="amount">Amount</SelectItem>
+                  <SelectItem value="percentage">Percentage</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="">
+              <span className="text-lg font bold pr-5">Total Amount: </span>
+              <Input
+                value={totalLimit}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setTotalLimit(+event.target.value || 0);
+                  setIsPlanEdited(true);
+                }}
+                placeholder="Total Amount"
+                className="w-18 h-9"
+              />
+            </div>
           </div>
           <Table>
             <TableHeader>
@@ -147,7 +152,7 @@ function Budget() {
                         handleBranchLimitChange(
                           index,
                           "percentage",
-                          +event.target.value
+                          +event.target.value || 0
                         )
                       }
                     />
@@ -160,7 +165,7 @@ function Budget() {
                         handleBranchLimitChange(
                           index,
                           "amount",
-                          +event.target.value
+                          +event.target.value || 0
                         )
                       }
                     />

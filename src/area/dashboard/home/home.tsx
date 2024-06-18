@@ -22,7 +22,7 @@ function Home() {
   ];
 
   return (
-    <div className=" h-[calc(100dvh-16px)] w-full pr-1 pb-4 pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
+    <div className=" h-[calc(100dvh-16px)] w-full pr-1 pb-4 pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto">
       <div className="w-auto py-5 shadow-all-sides rounded-xl flex flex-col items-center bg-white lg:col-start-1 lg:row-start-1 lg:row-end-5">
         <span className="pt-2 pb-8 text-xl font-bold">Consumption</span>
         <PieChart
@@ -49,7 +49,7 @@ function Home() {
           }}
         />
       </div>
-      <div className="w-auto py-10 px-5 shadow-all-sides rounded-2xl flex flex-col sm:flex-row items-center justify-evenly shadow-all bg-white lg:col-start-2 lg:row-start-1 lg:row-end-3">
+      <div className="w-auto py-10 px-5 shadow-all-sides rounded-2xl flex flex-col sm:flex-row items-center justify-evenly bg-white lg:col-start-2 lg:row-start-1 lg:row-end-3">
         <div className="flex flex-col items-center pb-16 sm:pb-0">
           <img src={branchesImage} alt="branches" className="h-16 w-16" />
           <span className="pt-5 font-bold">No. of Branches</span>
@@ -75,7 +75,7 @@ function Home() {
           <span className="pt-4 text-3xl">Rs. 5,00,00,000</span>
         </div>
       </div>
-      <div className="w-auto h-full py-10 px-5 shadow-all-sides rounded-2xl flex flex-col shadow-all bg-white lg:col-start-2 lg:row-start-3 lg:row-end-7">
+      <div className="w-auto h-full py-10 px-5 shadow-all-sides rounded-2xl flex flex-col bg-white lg:col-start-2 lg:row-start-3 lg:row-end-7">
         <div className="pb-5 flex items-center">
           <img src={consumptionImage} alt="branches" className="h-10 w-10" />
           <span className="px-5 font-bold text-xl">Rank of Consumption</span>
