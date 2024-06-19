@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import Autoplay from "embla-carousel-autoplay";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RoutePath } from "@/routes/paths";
 
 function LandingPage() {
@@ -156,14 +156,17 @@ function LandingPage() {
         </Accordion>
       </div>
       <div className="p-4 bg-gray-200/75 flex flex-col items-center justify-center">
-        <div className="mb-10 lg:px-24 w-full flex flex-col sm:flex-row items-center justify-between">
+        <div className="mb-10 lg:px-24 w-full flex flex-col sm:flex-row justify-between">
           <div>
             <img src={logoWithoutBackgroungImage} alt="logo" className="h-16" />
             <div className="px-5">
+              <div className="mb-2 w-60">Kramank Energy Pvt. Ltd</div>
               <div className="mb-2 w-60">
-                129, Street Name, Locality Name, City Name - Pincode
+                1st Floor, 677, HSR Layout, 27th main, 13th cross SECTOR 1,
+                Bengaluru Urban, Karnataka 560102
               </div>
-              <span className="flex items-center">
+              <div className="mb-2 w-60">GST: 29AAKCK7988E1ZR</div>
+              <span className="flex items-center hidden">
                 <img src={phoneImage} alt="phone" className="h-4 mr-4" />
                 +91 1234567890
               </span>
@@ -175,22 +178,24 @@ function LandingPage() {
           </div>
           <div className="pt-10 sm: pt-3 text-xl font-bold flex flex-col items-center sm:items-start">
             Follow us on
-            <ul className="pt-2 flex justify-center sm:block">
+            <span className="pt-2 flex justify-center sm:block">
               {followItems.map((item) => (
-                <li
+                <Link
+                  to={item.link}
                   key={item.id}
                   className="my-2 flex items-center cursor-pointer"
                 >
                   <img src={item.image} alt={item.name} className="h-5 mx-2" />
+
                   <span className="text-base font-normal hidden sm:block">
                     {item.name}
                   </span>
-                </li>
+                </Link>
               ))}
-            </ul>
+            </span>
           </div>
         </div>
-        <div>Copyright&copy; All Rights Reserved</div>
+        <div>Copyright &copy; All Rights Reserved</div>
       </div>
     </>
   );
