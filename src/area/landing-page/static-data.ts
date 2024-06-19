@@ -9,9 +9,9 @@ import vendorImage from "../../assets/vendor.png";
 import fastDeliveryImage from "../../assets/fast-delivery.png";
 import dashboardImage from "@/assets/dashboard.png";
 import foodImage from "../../assets/food.png";
-import facebookImage from "../../assets/facebook.png";
-import xImage from "../../assets/twitter.png";
-import instagramImage from "../../assets/instagram.png";
+// import facebookImage from "../../assets/facebook.png";
+// import xImage from "../../assets/twitter.png";
+// import instagramImage from "../../assets/instagram.png";
 import linkedInImage from "../../assets/linkedin.png";
 
 export const catalogItems = [
