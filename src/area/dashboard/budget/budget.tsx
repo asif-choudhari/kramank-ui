@@ -114,7 +114,7 @@ function Budget() {
                 </SelectContent>
               </Select>
             </div>
-            <div className="">
+            <div>
               <span className="text-lg font bold pr-5">Total Amount: </span>
               <Input
                 value={totalLimit}
