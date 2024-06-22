@@ -1,9 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '@/area/login/state/login.slice'
+import { configureStore } from "@reduxjs/toolkit";
+import loginReducer from "@/area/login/state/login.slice";
+import adminBranchReducer from "@/area/dashboard/admin-branch/state/admin-branch.slice";
 
 const store = configureStore({
   reducer: {
-    login: userReducer,
+    login: loginReducer,
+    adminBranch: adminBranchReducer,
   },
 });
 

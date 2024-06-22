@@ -57,7 +57,7 @@ function SideBar() {
   }, [location.pathname]);
 
   return (
-    <div className="h-auto w-14 md:w-60 p-4 flex flex-col items-center shadow-all-sides rounded-lg md:rounded-2xl bg-white z-5">
+    <div className="hidden md:block h-auto w-14 md:w-60 p-4 flex flex-col items-center shadow-all-sides rounded-lg md:rounded-2xl bg-white z-5">
       <Button
         onClick={() => {
           navigate(RoutePath.Products);

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { authorizeUserApi, loginUserApi } from "../api/login.api";
+import { authorizeUserApi, loginUserApi } from "../login.api";
 import {
   LoginPayload,
   AuthorizeApiResponse,
@@ -47,7 +47,7 @@ const initialState: LoginState = {
 };
 
 const loginSlice = createSlice({
-  name: "user",
+  name: "loginSlice",
   initialState,
   reducers: {
     setToken: (state, action) => {
@@ -77,7 +77,7 @@ const loginSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.error = action.payload.error;
-        cookies.set("token", action.payload.token);
+        cookies.set("token", action.payload.token, { maxAge: 60 * 60 * 3 });
       })
       .addCase(loginUserThunk.rejected, (state) => {
         state.status = "failed";
