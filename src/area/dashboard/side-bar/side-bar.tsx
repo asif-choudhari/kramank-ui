@@ -74,7 +74,7 @@ function SideBar() {
             key={sidebarNavItem.title}
             onClick={() => {
               navigate(sidebarNavItem.path);
-              setCurrentTab(sidebarNavItem.title);
+              setCurrentTab(sidebarNavItem.path.split("/")[1]);
             }}
             className={`my-4 md:p-2 h-10 w-full flex items-center justify-center md:justify-start cursor-pointer rounded-md inline-block ${
               sidebarNavItem.path.includes(currentTab)

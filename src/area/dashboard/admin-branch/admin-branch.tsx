@@ -181,7 +181,7 @@ function AdminBranch() {
                 defaultValue={selectedAdmin}
                 onValueChange={setSelectedAdmin}
               >
-                <SelectTrigger className="">
+                <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

@@ -28,7 +28,7 @@ function RaiseQuery() {
           <span>Query Type:</span>
           <div className="py-2">
             <Select defaultValue={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger className="">
+              <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -37,7 +37,7 @@ function RaiseQuery() {
               </SelectContent>
             </Select>
           </div>
-          <div className="">
+          <div>
             <Textarea
               placeholder="Type your message here."
               className="h-40 max-h-72"
