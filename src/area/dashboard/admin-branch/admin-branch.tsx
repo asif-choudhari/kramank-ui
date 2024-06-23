@@ -50,7 +50,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 function AdminBranch() {
   const dispatch = useDispatch<AppDispatch>();
@@ -76,13 +76,11 @@ function AdminBranch() {
           userId: Number(selectedAdmin),
           branchId: selectedBranchToMove.branchId,
         })
-      )
-        .then(() => {
-          toast.success("Saved Successfully");
-        })
-        .catch(() => {
-          toast.error("Could not assign an admin");
-        });
+      ).then((result) => {
+        result.type.includes("rejected")
+          ? toast.error("Could not assign Admin to the branch")
+          : toast.success("Saved Successfully");
+      });
       await dispatch(getAdminBranchRelationshipThunk({ token, companyId: 1 }));
     };
 
@@ -201,7 +199,6 @@ function AdminBranch() {
           </Dialog>
         </div>
       </div>
-      <Toaster richColors />
     </>
   );
 }

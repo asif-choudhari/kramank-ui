@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginReducer from "@/area/login/state/login.slice";
-import adminBranchReducer from "@/area/dashboard/admin-branch/state/admin-branch.slice";
+import loginSlice from "@/area/login/state/login.slice";
+import adminBranchSlice from "@/area/dashboard/admin-branch/state/admin-branch.slice";
+import rasieQuerySlice from "./area/dashboard/raise-query/state/rasie-query.slice";
 
 const store = configureStore({
   reducer: {
-    login: loginReducer,
-    adminBranch: adminBranchReducer,
+    login: loginSlice,
+    adminBranch: adminBranchSlice,
+    rasieQuery: rasieQuerySlice,
   },
 });
 

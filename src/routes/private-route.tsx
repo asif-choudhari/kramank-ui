@@ -11,6 +11,7 @@ import {
 import { RoutePath } from "./paths";
 import TopNav from "@/area/top-nav/top-nav";
 import Spinner from "@/area/common/spinner";
+import { Toaster } from "sonner";
 
 const PrivateRoute = (): React.ReactElement => {
   const dispatch = useDispatch<AppDispatch>();
@@ -53,6 +54,7 @@ const PrivateRoute = (): React.ReactElement => {
         <TopNav />
       </div>
       <Outlet />
+      <Toaster richColors />
     </div>
   );
 };
