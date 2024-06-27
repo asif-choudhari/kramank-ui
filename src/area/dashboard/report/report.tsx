@@ -49,7 +49,7 @@ function Report() {
   const [isSlected, setIsSelected] = useState<boolean>(false);
 
   return (
-    <div className="h-[calc(100dvh-16px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
+    <div className="h-[calc(100dvh-180px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
       <div className="w-auto h-auto p-5 shadow-all-sides rounded-2xl flex flex-col items-center justify-center bg-white lg:col-start-1 lg:row-start-1 lg:row-end-7 overflow-hidden">
         <div className="w-full flex justify-between items-center">
           <span className="font-bold text-xl">
