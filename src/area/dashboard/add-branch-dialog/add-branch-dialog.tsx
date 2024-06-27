@@ -28,7 +28,15 @@ import {
 } from "./state/add-branch-dialog.slice";
 import { adminListSelector } from "./state/add-branch-dialog.selector";
 
-function AddBranchDialog({ dialogOpen, setDialogOpen }) {
+type AddBranchDialogPropsType = {
+  dialogOpen: boolean;
+  setDialogOpen: (dialogOpen: boolean) => void;
+};
+
+function AddBranchDialog({
+  dialogOpen,
+  setDialogOpen,
+}: AddBranchDialogPropsType) {
   const dispatch = useDispatch<AppDispatch>();
 
   const [branchName, setBranchName] = useState<string>("");
