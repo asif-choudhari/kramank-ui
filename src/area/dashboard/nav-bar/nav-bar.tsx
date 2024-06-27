@@ -5,7 +5,7 @@ import {
   ClipboardList,
   Landmark,
   MailCheck,
-  Newspaper,
+  // Newspaper,
   Store,
   Wallet,
 } from "lucide-react";

@@ -26,7 +26,7 @@ type BranchBudgetType = {
 
 function Budget() {
   const [distributionType, setDistributionType] = useState<string>("amount");
-  const [totalLimit, setTotalLimit] = useState<number>(0);
+  const [totalLimit] = useState<number>(0);
   const [branchBudgetData, setBranchBudgetData] = useState<BranchBudgetType[]>([
     { name: "Bangalore", percentage: 0, amount: 0 },
     { name: "New Delhi", percentage: 0, amount: 0 },
