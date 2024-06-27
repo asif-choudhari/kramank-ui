@@ -13,7 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { RoutePath } from "@/routes/paths";
 import { useEffect, useState } from "react";
 
-const sidebarNavItems = [
+const navBarItems = [
   {
     title: "Home",
     icon: <Landmark />,
@@ -34,11 +34,11 @@ const sidebarNavItems = [
     icon: <ClipboardList />,
     path: RoutePath.DashboardReport,
   },
-  {
-    title: "Invoice",
-    icon: <Newspaper />,
-    path: RoutePath.DashboardInvoice,
-  },
+  // {
+  //   title: "Invoice",
+  //   icon: <Newspaper />,
+  //   path: RoutePath.DashboardInvoice,
+  // },
   {
     title: "Raise Query",
     icon: <MailCheck />,
@@ -46,7 +46,7 @@ const sidebarNavItems = [
   },
 ];
 
-function SideBar() {
+function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -57,33 +57,31 @@ function SideBar() {
   }, [location.pathname]);
 
   return (
-    <div className="hidden md:block h-auto w-14 md:w-60 p-4 flex flex-col items-center shadow-all-sides rounded-lg md:rounded-2xl bg-white z-5">
+    <div className="absolute md:static bottom-0 h-16 w-full md:block md:h-auto md:w-60 p-4 flex md:flex-col items-center shadow-bottom-nav md:shadow-all-sides rounded-2xl bg-white z-50">
       <Button
         onClick={() => {
           navigate(RoutePath.Products);
         }}
-        className="rounded-lg bg-white text-stone-900 md:bg-stone-900 md:text-white"
+        className="rounded-lg bg-white text-stone-900 bg-stone-900 text-white"
       >
         <ArrowLeft />
         <p className="px-5 hidden md:block">Back to Products</p>
       </Button>
-      <Separator className="mt-4" />
-      <div className="w-14 p-2 md:p-0 md:w-full">
-        {sidebarNavItems.map((sidebarNavItem) => (
+      <Separator className="mt-4 hidden md:block" />
+      <div className="w-full md:w-14 p-2 flex md:inline md:p-0 md:w-full">
+        {navBarItems.map((navItem) => (
           <div
-            key={sidebarNavItem.title}
+            key={navItem.title}
             onClick={() => {
-              navigate(sidebarNavItem.path);
-              setCurrentTab(sidebarNavItem.path.split("/")[2]);
+              navigate(navItem.path);
+              setCurrentTab(navItem.path.split("/")[2]);
             }}
             className={`my-4 md:p-2 h-10 w-full flex items-center justify-center md:justify-start cursor-pointer rounded-md inline-block ${
-              sidebarNavItem.path.includes(currentTab)
-                ? "bg-slate-600 text-white"
-                : ""
+              navItem.path.includes(currentTab) ? "bg-slate-600 text-white" : ""
             }`}
           >
-            <span className="text-center">{sidebarNavItem.icon}</span>
-            <span className="pl-4 hidden md:block">{sidebarNavItem.title}</span>
+            <span className="text-center">{navItem.icon}</span>
+            <span className="pl-4 hidden md:block">{navItem.title}</span>
           </div>
         ))}
       </div>
@@ -91,4 +89,4 @@ function SideBar() {
   );
 }
 
-export default SideBar;
+export default NavBar;

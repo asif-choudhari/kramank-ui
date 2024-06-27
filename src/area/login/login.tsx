@@ -59,7 +59,7 @@ function Login() {
   }
 
   const handleCheckboxClick = () => {
-    setIsShowPasswordCheckboxChecked((previous) => !previous);
+    setIsShowPasswordCheckboxChecked(!isShowPasswordCheckboxChecked);
   };
 
   const handleLogin = (event: React.ChangeEvent<HTMLFormElement>) => {

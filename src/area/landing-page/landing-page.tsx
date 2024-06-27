@@ -40,10 +40,10 @@ function LandingPage() {
         <Button
           className="bg-black"
           onClick={() => {
-            navigate(RoutePath.Login);
+            navigate(RoutePath.Waitlist);
           }}
         >
-          Login / Signup
+          Register
         </Button>
       </div>
       <div className="mt-24 mb-20 flex items-center justify-center relative">

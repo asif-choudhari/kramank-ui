@@ -64,13 +64,13 @@ function Budget() {
   };
 
   return (
-    <div className="h-full pr-1 pb-4 pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto">
-      <div className="w-full h-48 p-5 shadow-all-sides rounded-2xl bg-white flex flex-col items-center gap-5 lg:col-start-1 lg:row-start-1 lg:row-end-3">
+    <div className="h-[calc(100dvh-16px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
+      <div className="w-full p-5 shadow-all-sides rounded-2xl bg-white flex flex-col items-center gap-5 lg:col-start-1 lg:row-start-1 lg:row-end-3">
         <span className="w-full float-left font-bold text-2xl">Wallet</span>
         <span className="text-3xl">&#8377; 2,00,000</span>
         <Button>Recharge</Button>
       </div>
-      <div className="w-auto h-96 p-10 shadow-all-sides rounded-2xl flex items-center justify-evenly bg-white lg:col-start-1 lg:row-start-3 lg:row-end-7 overflow-x-auto overflow-y-auto hide-scrollbar">
+      <div className="w-auto p-10 shadow-all-sides rounded-2xl flex items-center justify-evenly bg-white lg:col-start-1 lg:row-start-3 lg:row-end-7 overflow-x-auto overflow-y-auto hide-scrollbar">
         <LineChart
           height={400}
           showArea
@@ -93,88 +93,67 @@ function Budget() {
           yAxisData={[2, 3, 5, 6, 7, 1, 8, 2, 1, 5, 0, 9, 12]}
         />
       </div>
-      <div className="w-auto h-[700px] lg:h-full p-5 shadow-all-sides rounded-2xl flex flex-col bg-white lg:col-start-2 lg:row-start-1 lg:row-end-7">
-        <div className="w-full h-10 font-bold text-xl">
-          <span>Budget Plan</span>
-        </div>
-        <div className="mt-6 flex flex-col items-center">
-          <div className="flex flex-col lg:flex-row justify-between gap-5 lg:gap-4 xl:gap-20 lg:items-center pb-8">
-            <div>
-              <span className="text-lg font bold pr-5">Distibute By: </span>
-              <Select
-                defaultValue={distributionType}
-                onValueChange={setDistributionType}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="amount">Amount</SelectItem>
-                  <SelectItem value="percentage">Percentage</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <span className="text-lg font bold pr-5">Total Amount: </span>
-              <Input
-                value={totalLimit}
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setTotalLimit(+event.target.value || 0);
-                }}
-                placeholder="Total Amount"
-                className="w-18 h-9"
-              />
-            </div>
-          </div>
-          <div className="h-[400px] overflow-y-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Branch</TableHead>
-                  <TableHead className="text-center">Percentage</TableHead>
-                  <TableHead className="text-center">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {branchBudgetData.map((item, index) => (
-                  <TableRow key={item.name}>
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell className="text-center">
-                      <Input
-                        value={item.percentage}
-                        disabled={distributionType === "amount"}
-                        onChange={(
-                          event: React.ChangeEvent<HTMLInputElement>
-                        ) =>
-                          handleBranchLimitChange(
-                            index,
-                            "percentage",
-                            +event.target.value || 0
-                          )
-                        }
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Input
-                        value={item.amount}
-                        disabled={distributionType === "percentage"}
-                        onChange={(
-                          event: React.ChangeEvent<HTMLInputElement>
-                        ) =>
-                          handleBranchLimitChange(
-                            index,
-                            "amount",
-                            +event.target.value || 0
-                          )
-                        }
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+      <div className="w-auto h-[500px] lg:h-full py-10 px-5 shadow-all-sides rounded-2xl flex flex-col bg-white lg:col-start-2 lg:row-start-1 lg:row-end-7">
+        <div className="pb-5 flex flex-col justify-center">
+          <span className="font-bold text-xl">Budget Plan</span>
+          <div className="py-5 flex items-center justify-center">
+            <span className="text-lg font bold pr-5">Distibute By: </span>
+            <Select
+              defaultValue={distributionType}
+              onValueChange={setDistributionType}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="amount">Amount</SelectItem>
+                <SelectItem value="percentage">Percentage</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Branch</TableHead>
+              <TableHead className="text-center">Percentage</TableHead>
+              <TableHead className="text-center">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {branchBudgetData.map((item, index) => (
+              <TableRow key={item.name}>
+                <TableCell>{item.name}</TableCell>
+                <TableCell className="text-center">
+                  <Input
+                    value={item.percentage}
+                    disabled={distributionType === "amount"}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      handleBranchLimitChange(
+                        index,
+                        "percentage",
+                        +event.target.value || 0
+                      )
+                    }
+                  />
+                </TableCell>
+                <TableCell>
+                  <Input
+                    value={item.amount}
+                    disabled={distributionType === "percentage"}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                      handleBranchLimitChange(
+                        index,
+                        "amount",
+                        +event.target.value || 0
+                      )
+                    }
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

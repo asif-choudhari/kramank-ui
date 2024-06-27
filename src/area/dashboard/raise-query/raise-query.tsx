@@ -97,7 +97,7 @@ function RaiseQuery() {
 
   return (
     <>
-      <div className="h-full pr-1 pb-4 pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto">
+      <div className="h-[calc(100dvh-16px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
         <div className="w-auto h-full p-5 shadow-all-sides rounded-xl flex flex-col items-center bg-white lg:col-start-1 lg:row-start-1 lg:row-end-7">
           <div className="w-full h-10 font-bold text-xl">
             <span>Raise Query</span>
@@ -121,7 +121,9 @@ function RaiseQuery() {
             <div className="py-2">
               <Input
                 type="text"
-                placeholder="A short title for your query."
+                placeholder={`A short title for your ${
+                  selectedType === "2" ? "product request" : "issue"
+                }.`}
                 value={titleText}
                 onChange={(evet: React.ChangeEvent<HTMLInputElement>) => {
                   setTitleText(evet.target.value);

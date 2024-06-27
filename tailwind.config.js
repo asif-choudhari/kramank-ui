@@ -79,7 +79,9 @@ module.exports = {
       },
       boxShadow: {
         "all-sides":
-          "0 4px 10px -1px rgba(0, 0, 0, 0.1), 0 4px 10px -1px rgba(0, 0, 0, 0.06)",
+          "0 4px 10px -1px rgba(0, 0, 0, 0.1), 0 4px 10px -1px rgba(0, 0, 0, 0.1)",
+        "bottom-nav":
+          "0 5px 10px 5px rgba(0, 0, 0, 0.3), 0 5px 20px 5px rgba(0, 0, 0, 0.1)",
       },
     },
   },

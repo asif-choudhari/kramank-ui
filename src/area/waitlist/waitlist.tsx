@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 import { Toaster } from "sonner";
 
 function Waitlist() {
-  // const dispatch = useDispatch<AppDispatch>();
-  // const navigate = useNavigate();
-
   const [fullName, setFullName] = useState<string>("");
   const [businessEmail, setBusinessEmail] = useState<string>("");
   const [location, setLocation] = useState<string>("");
