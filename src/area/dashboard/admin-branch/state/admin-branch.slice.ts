@@ -21,7 +21,7 @@ export const getAdminCountThunk = createAsyncThunk<
   AdminCountApiResposne,
   ApiPayload
 >("admin-branch/getAdminCount", async ({ token, companyId }) => {
-  const response = await getAdminCountApi(token, companyId || -1);
+  const response = await getAdminCountApi(token, companyId);
   return response;
 });
 
