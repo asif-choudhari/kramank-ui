@@ -98,7 +98,7 @@ function AdminBranch() {
 
   return (
     <>
-      <div className="h-[calc(100dvh-180px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
+      <div className="h-[calc(100dvh-180px)] md:h-[calc(100dvh-16px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
         <div className="h-full w-auto p-5 shadow-all-sides rounded-2xl bg-slate-600 text-white flex items-center justify-center lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-4">
           <div className="flex flex-col items-center pb-16 sm:pb-0">
             <img src={adminImage} alt="branches" className="h-20 w-20" />

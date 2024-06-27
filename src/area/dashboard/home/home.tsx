@@ -107,7 +107,7 @@ function Home() {
   }, [usedAmount, unusedAmount]);
 
   return (
-    <div className="h-[calc(100dvh-180px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
+    <div className="h-[calc(100dvh-180px)] md:h-[calc(100dvh-16px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
       <div className="w-auto py-5 shadow-all-sides rounded-xl flex flex-col items-center bg-white lg:col-start-1 lg:row-start-1 lg:row-end-5">
         <span className="pt-2 pb-8 text-xl font-bold">Consumption</span>
         {isConsumptionApiLoading ? (

@@ -64,7 +64,7 @@ function Budget() {
   };
 
   return (
-    <div className="h-[calc(100dvh-180px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
+    <div className="h-[calc(100dvh-180px)] md:h-[calc(100dvh-16px)] md:pr-1 pb-4 md:pl-4 grid gap-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-6 overflow-y-auto hide-scrollbar">
       <div className="w-full p-5 shadow-all-sides rounded-2xl bg-white flex flex-col items-center gap-5 lg:col-start-1 lg:row-start-1 lg:row-end-3">
         <span className="w-full float-left font-bold text-2xl">Wallet</span>
         <span className="text-3xl">&#8377; 2,00,000</span>

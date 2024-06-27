@@ -21,7 +21,7 @@ function Dashboard() {
     <Dialog>
       <div className="relative flex h-full w-full">
         <NavBar />
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col h-[calc(100dvh-16px)] w-full">
           <div className="h-20 rounded-2xl shadow-all-sides md:ml-4 mb-4 bg-white flex justify-between px-4 items-center z-5">
             <span className="text-3xl">Infosys</span>
             <DialogTrigger asChild>
