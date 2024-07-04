@@ -190,7 +190,7 @@ function AddBranchDialog({
                 id="adminName"
                 className="mt-2"
                 placeholder="Last Name"
-                value={adminFirstName}
+                value={adminLastName}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   setAdminLastName(event.target.value)
                 }

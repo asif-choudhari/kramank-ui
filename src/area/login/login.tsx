@@ -55,7 +55,7 @@ function Login() {
   }, [dispatch]);
 
   if (token) {
-    return <Navigate to={RoutePath.Products} />;
+    return <Navigate to={RoutePath.Categories} />;
   }
 
   const handleCheckboxClick = () => {

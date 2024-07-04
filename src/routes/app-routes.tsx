@@ -19,7 +19,7 @@ function AppRoutes() {
       <Route path="login" Component={Login} />
       <Route path="waitlist" Component={Waitlist} />
       <Route element={<PrivateRoute />}>
-        <Route path="products" element={<Products />} />
+        <Route path="categories" element={<Products />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="admin-branch" element={<AdminBranch />} />
