@@ -10,7 +10,8 @@ import Invoice from "@/area/dashboard/invoice/invoice";
 import RaiseQuery from "@/area/dashboard/raise-query/raise-query";
 import PrivateRoute from "./private-route";
 import Waitlist from "@/area/waitlist/waitlist";
-import Products from "@/area/products/products";
+import Products from "@/area/products/products-services";
+import ProductPage from "@/area/product/product";
 
 function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ function AppRoutes() {
       <Route path="waitlist" Component={Waitlist} />
       <Route element={<PrivateRoute />}>
         <Route path="categories" element={<Products />} />
+        <Route path="product/:id" element={<ProductPage />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="admin-branch" element={<AdminBranch />} />

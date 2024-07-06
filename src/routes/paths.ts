@@ -4,6 +4,7 @@ export const RoutePath = {
   Waitlist: "/waitlist",
   Categories: "/categories",
   Products: "/products",
+  ProductPage: "/product",
   DashboardHome: "/dashboard/home",
   DashboardAdminAndBranch: "/dashboard/admin-branch",
   DashboarBudget: "/dashboard/budget",

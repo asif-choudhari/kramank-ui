@@ -33,6 +33,46 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import CurrencyDisplay from "../common/currency-dispaly";
+
+const getProgressColor = (percentage: number) => {
+  if (percentage <= 25) {
+    return "bg-green-500";
+  } else if (percentage <= 50) {
+    return "bg-yellow-500";
+  } else if (percentage <= 75) {
+    return "bg-orange-500";
+  } else {
+    return "bg-red-500";
+  }
+};
+
+type ProgressBarPropsType = {
+  label: string;
+  used: number;
+  allocated: number;
+};
+
+function ProgressBar({ label, used, allocated }: ProgressBarPropsType) {
+  const usedPercentage = (used / allocated) * 100;
+
+  return (
+    <div className="w-full mt-4">
+      <div className="text-sm font-medium text-gray-700 mb-1">
+        {label}: <CurrencyDisplay amount={used} /> /
+        <CurrencyDisplay amount={allocated} />
+      </div>
+      <div className="relative h-4 bg-gray-200 rounded-full">
+        <div
+          className={`absolute h-full rounded-full ${getProgressColor(
+            usedPercentage
+          )}`}
+          style={{ width: `${usedPercentage}%` }}
+        ></div>
+      </div>
+    </div>
+  );
+}
 
 function TopNav() {
   const dispatch = useDispatch<AppDispatch>();
@@ -44,6 +84,8 @@ function TopNav() {
     useState<boolean>(false);
   const [changePasswordDialogOpen, setChangePasswordDialogOpen] =
     useState<boolean>(false);
+  const [progressDialogOpen, setProgressDialogOpen] = useState<boolean>(false);
+
   const [adminFirstName, setAdminFirstName] = useState<string>(user.firstName);
   const [adminLastName, setAdminLastName] = useState<string>(user.lastName);
   const [adminEmail, setAdminEmail] = useState<string>(user.email);
@@ -70,17 +112,44 @@ function TopNav() {
     }
   }, [userProfileDialogOpen, user]);
 
+  const amountUsed = 850;
+  const amountAllocated = 1700;
+  const usedPercentage = (amountUsed / amountAllocated) * 100;
+
+  const progressData = [
+    { label: "Project A", used: 400, allocated: 1000 },
+    { label: "Project B", used: 300, allocated: 500 },
+    { label: "Project C", used: 150, allocated: 200 },
+  ];
+
   return (
-    <div className="h-16 px-4 mb-2 grid grid-cols-2 sm:grid-cols-3 items-center rounded-2xl bg-white shadow-all-sides">
+    <div className="h-16 px-4 mb-2 flex items-center justify-between rounded-2xl bg-white shadow-all-sides">
       <div className="w-48 cursor-pointer hidden sm:block">
         <img src={logo} alt="logo" />
       </div>
-      <div className="relative w-full max-w-[500px]">
+      <div className="relative w-full max-w-[300px]">
         <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input
           placeholder="Search Products"
           className="pl-8 hover:border-none focus:border-none"
         />
+      </div>
+      <div className="hidden md:inline ">
+        <div className="text-sm font-medium text-gray-700 mb-1">
+          Usage: <CurrencyDisplay amount={amountUsed} /> /
+          <CurrencyDisplay amount={amountAllocated} />
+        </div>
+        <div
+          className="relative h-4 bg-gray-200 rounded-full cursor-pointer"
+          onClick={() => setProgressDialogOpen(true)}
+        >
+          <div
+            className={`absolute h-full rounded-full ${getProgressColor(
+              usedPercentage
+            )}`}
+            style={{ width: `${usedPercentage}%` }}
+          ></div>
+        </div>
       </div>
       <div className="flex items-center justify-end">
         <div className="px-3">
@@ -228,6 +297,24 @@ function TopNav() {
           </div>
           <DialogFooter>
             <Button type="submit">Save</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={progressDialogOpen} onOpenChange={setProgressDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Detailed Progress</DialogTitle>
+          </DialogHeader>
+          {progressData.map((item, index) => (
+            <ProgressBar
+              key={index}
+              label={item.label}
+              used={item.used}
+              allocated={item.allocated}
+            />
+          ))}
+          <DialogFooter>
+            <Button onClick={() => setProgressDialogOpen(false)}>Close</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
