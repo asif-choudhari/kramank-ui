@@ -16,7 +16,7 @@ const ProductCard = ({
   rating,
   price,
 }: ProductsCardPropsType) => (
-  <div className="rounded-lg shadow-md p-4 flex flex-col bg-white overflow-y-auto hide-scrollbar">
+  <div className="h-max md:h-full rounded-lg shadow-md p-4 flex flex-col bg-white overflow-y-auto hide-scrollbar">
     <img
       src={imageSrc}
       alt={title}
