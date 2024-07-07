@@ -8,7 +8,7 @@ import medalImage from "../../assets/medal.png";
 import vendorImage from "../../assets/vendor.png";
 import fastDeliveryImage from "../../assets/fast-delivery.png";
 import dashboardImage from "@/assets/dashboard.png";
-import foodImage from "../../assets/food.png";
+import chaiDegreeLogo from "@/assets/chai-degree.png";
 // import facebookImage from "../../assets/facebook.png";
 // import xImage from "../../assets/twitter.png";
 // import instagramImage from "../../assets/instagram.png";
@@ -50,44 +50,11 @@ export const whyItems = [
 
 export const successStoriesItems = [
   {
-    image: foodImage,
-    name: "Customer Name",
-    bussinessName: "Bussiness Name",
-    location: "Bangalore, India",
+    image: chaiDegreeLogo,
+    name: "Chai Degree",
+    location: "Guwahati",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien.",
-  },
-  {
-    image: foodImage,
-    name: "Customer Name",
-    bussinessName: "Bussiness Name",
-    location: "Bangalore, India",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien.",
-  },
-  {
-    image: foodImage,
-    name: "Customer Name",
-    bussinessName: "Bussiness Name",
-    location: "Bangalore, India",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien.",
-  },
-  {
-    image: foodImage,
-    name: "Customer Name",
-    bussinessName: "Bussiness Name",
-    location: "Bangalore, India",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien.",
-  },
-  {
-    image: foodImage,
-    name: "Customer Name",
-    bussinessName: "Bussiness Name",
-    location: "Bangalore, India",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ligula turpis, mollis et dapibus vitae, venenatis eu ligula. Quisque interdum accumsan est vel iaculis. Fusce cursus id turpis vel elementum. Praesent id placerat sapien.",
+      "Amazing platform, it solves all our problems, and the pace at which they are adding new product is also good. Solving all the problems we face as a business one by one !",
   },
 ];
 

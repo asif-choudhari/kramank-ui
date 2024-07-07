@@ -121,7 +121,7 @@ function LandingPage() {
             {successStoriesItems.map((story, index) => (
               <CarouselItem
                 key={index}
-                className="my-10 p-2 mr-6 shadow-lg rounded-2xl flex flex-col items-center lg:flex-row"
+                className="my-10 p-2 mr-6 shadow-all-sides rounded-2xl flex flex-col items-center lg:flex-row"
               >
                 <img
                   src={story.image}
@@ -131,7 +131,7 @@ function LandingPage() {
                 <div className="px-6">
                   <span className="text-sm">{story.description}</span>
                   <div className="mt-3 text-lg font-bold">{story.name}</div>
-                  <span className="text-sm">{`${story.bussinessName}, ${story.location}`}</span>
+                  <span className="text-sm">{story.location}</span>
                 </div>
               </CarouselItem>
             ))}

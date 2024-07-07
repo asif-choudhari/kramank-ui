@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RoutePath } from "@/routes/paths";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "sonner";
 
 function Waitlist() {
+  const navigate = useNavigate();
+
   const [fullName, setFullName] = useState<string>("");
   const [businessEmail, setBusinessEmail] = useState<string>("");
   const [location, setLocation] = useState<string>("");
@@ -20,7 +22,12 @@ function Waitlist() {
   return (
     <div className="h-screen w-screen flex items-center justify-center sm:bg-slate-200">
       <div className="bg-white w-full sm:w-8/12 sm:h-11/12 md:w-1/2 lg:w-[512px] pl-10 pr-16 pb-10 sm:rounded-2xl sm:shadow-2xl flex flex-col">
-        <img src={logo} alt="logo" className="h-12 w-48 my-4" />
+        <img
+          src={logo}
+          alt="logo"
+          className="h-12 w-48 my-4 cursor-pointer"
+          onClick={() => navigate(-1)}
+        />
         <div className="flex flex-col pl-5">
           <span className="py-2">
             Fill out the form and the representative from KRAMANK will contact

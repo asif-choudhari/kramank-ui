@@ -127,7 +127,12 @@ function TopNav() {
   return (
     <div className="h-16 px-4 mb-2 flex items-center justify-between rounded-2xl bg-white shadow-all-sides">
       <div className="w-48 cursor-pointer">
-        <img src={logo} alt="logo" className="h-16 w-16" />
+        <img
+          src={logo}
+          alt="logo"
+          className="h-16 w-16 cursor-pointer"
+          onClick={() => navigate(-1)}
+        />
       </div>
       <div className="relative w-full max-w-[300px]">
         <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
