@@ -5,66 +5,80 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RoutePath } from "@/routes/paths";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   authorizeUserThunk,
-  resetError,
   loginUserThunk,
+  setLogin,
+  setToken,
+  setAuth,
 } from "./state/login.slice";
 import { AppDispatch } from "@/store";
-import {
-  errorSelector,
-  statusSelector,
-  tokenSelector,
-} from "./state/login.selector";
+import { errorSelector } from "./state/login.selector";
 import { toast, Toaster } from "sonner";
 import { useCookies } from "react-cookie";
+import Spinner from "../common/spinner";
 
 function Login() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const [cookies] = useCookies(["token"]);
+
+  const error = useSelector(errorSelector);
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isShowPasswordCheckboxChecked, setIsShowPasswordCheckboxChecked] =
     useState<boolean>(false);
-
-  const status = useSelector(statusSelector);
-  const error = useSelector(errorSelector);
-  const token = useSelector(tokenSelector);
+  const [checkComplete, setCheckComplete] = useState<boolean>(false);
+  const [loggingIn, setLoggingIn] = useState<boolean>(false);
 
   useEffect(() => {
-    if (cookies.token) {
-      dispatch(authorizeUserThunk({ token: cookies.token }));
-    }
-  }, [cookies.token, dispatch]);
-
-  useEffect(() => {
-    if (error && error !== "Invalid token") {
-      toast.error("Error:", {
-        description: error,
-      });
-    }
-  }, [error]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetError());
+    const checkAuthorization = async () => {
+      setCheckComplete(false);
+      if (cookies.token) {
+        await dispatch(authorizeUserThunk({ token: cookies.token })).then(
+          (response) => {
+            if (!response.type.includes("rejected")) {
+              dispatch(setAuth(response.payload));
+              dispatch(setToken(cookies.token));
+              navigate(RoutePath.Home);
+            }
+          }
+        );
+      }
+      setCheckComplete(true);
     };
-  }, [dispatch]);
 
-  if (token) {
-    return <Navigate to={RoutePath.Categories} />;
+    checkAuthorization();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (!checkComplete) {
+    return (
+      <div className="h-dvh w-svh flex bg-slate-100">
+        <Spinner className="h-20 w-20 m-auto" />;
+      </div>
+    );
   }
 
   const handleCheckboxClick = () => {
     setIsShowPasswordCheckboxChecked(!isShowPasswordCheckboxChecked);
   };
 
-  const handleLogin = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(loginUserThunk({ email, password }));
+    setLoggingIn(true);
+    await dispatch(loginUserThunk({ email, password })).then((response) => {
+      if (response.type.includes("rejected")) {
+        toast.error(error);
+      } else {
+        dispatch(setLogin(response.payload));
+        navigate(RoutePath.Home);
+      }
+      setLoggingIn(false);
+    });
   };
 
   return (
@@ -94,7 +108,7 @@ function Login() {
               type={isShowPasswordCheckboxChecked ? "text" : "password"}
               id="password"
               autoComplete="true"
-              minLength={3}
+              minLength={6}
               className="mt-2"
               value={password}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -119,10 +133,10 @@ function Login() {
           </div>
           <Button
             type="submit"
-            disabled={email === "" || password === "" || status === "loading"}
+            disabled={email === "" || password === "" || loggingIn}
             className="mt-5 w-full"
           >
-            {status === "loading" ? "Logging In, Please Wait" : "Log In"}
+            {loggingIn ? "Logging In, Please Wait" : "Log In"}
           </Button>
         </form>
         <div className="pl-5">

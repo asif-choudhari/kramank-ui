@@ -25,7 +25,7 @@ import {
   getBranchListThunk,
   setBranchAdminThunk,
 } from "./state/admin-branch.slice";
-import { tokenSelector } from "@/area/login/state/login.selector";
+import { tokenSelector, userSelector } from "@/area/login/state/login.selector";
 import { EllipsisVertical } from "lucide-react";
 import {
   DropdownMenu,
@@ -56,6 +56,7 @@ function AdminBranch() {
   const dispatch = useDispatch<AppDispatch>();
 
   const token = useSelector(tokenSelector);
+  const user = useSelector(userSelector);
   const adminCount = useSelector(adminCountSelector);
   const branchCount = useSelector(branchCountSelector);
   const relationshipList = useSelector(relationshipListSelector);
@@ -72,7 +73,7 @@ function AdminBranch() {
       await dispatch(
         setBranchAdminThunk({
           token,
-          companyId: 1,
+          companyId: user.companyId,
           userId: Number(selectedAdmin),
           branchId: selectedBranchToMove.branchId,
         })
@@ -81,18 +82,22 @@ function AdminBranch() {
           ? toast.error("Could not assign Admin to the branch")
           : toast.success("Saved Successfully");
       });
-      await dispatch(getAdminBranchRelationshipThunk({ token, companyId: 1 }));
+      await dispatch(
+        getAdminBranchRelationshipThunk({ token, companyId: user.companyId })
+      );
     };
 
     setBranchAdmin();
   };
 
   useEffect(() => {
-    dispatch(getAdminCountThunk({ token, companyId: 1 }));
-    dispatch(getBranchCountThunk({ token, companyId: 1 }));
-    dispatch(getAdminBranchRelationshipThunk({ token, companyId: 1 }));
-    dispatch(getAdminListThunk({ token, companyId: 1 }));
-    dispatch(getBranchListThunk({ token, companyId: 1 }));
+    dispatch(getAdminCountThunk({ token, companyId: user.companyId }));
+    dispatch(getBranchCountThunk({ token, companyId: user.companyId }));
+    dispatch(
+      getAdminBranchRelationshipThunk({ token, companyId: user.companyId })
+    );
+    dispatch(getAdminListThunk({ token, companyId: user.companyId }));
+    dispatch(getBranchListThunk({ token, companyId: user.companyId }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

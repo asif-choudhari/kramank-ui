@@ -19,7 +19,7 @@ import {
   setConsumption,
   setGeographiesCount,
 } from "./state/home.slice";
-import { tokenSelector } from "@/area/login/state/login.selector";
+import { tokenSelector, userSelector } from "@/area/login/state/login.selector";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import {
@@ -56,6 +56,7 @@ function Home() {
   ]);
 
   const token = useSelector(tokenSelector);
+  const user = useSelector(userSelector);
   const branchCount = useSelector(branchCountSelector);
   const geographiesCount = useSelector(geographiesCountSelector);
   const usedAmount = useSelector(usedAmountSelector);
@@ -64,7 +65,7 @@ function Home() {
 
   const getConsumption = async () => {
     setIsConsumptionApiLoading(true);
-    await dispatch(getConsumptionThunk({ token, companyId: 1 }))
+    await dispatch(getConsumptionThunk({ token, companyId: user.companyId }))
       .then((response) => {
         response.type.includes("rejected")
           ? toast.error("Could not fetch Consumption Data")
@@ -76,21 +77,21 @@ function Home() {
   };
 
   const getCounts = async () => {
-    await dispatch(getBranchCountThunk({ token, companyId: 1 })).then(
-      (response) => {
-        response.type.includes("rejected")
-          ? toast.error("Could not fetch Branch count")
-          : dispatch(setBranchCount(response.payload));
-      }
-    );
+    await dispatch(
+      getBranchCountThunk({ token, companyId: user.companyId })
+    ).then((response) => {
+      response.type.includes("rejected")
+        ? toast.error("Could not fetch Branch count")
+        : dispatch(setBranchCount(response.payload));
+    });
 
-    await dispatch(getGeographiesCountThunk({ token, companyId: 1 })).then(
-      (response) => {
-        response.type.includes("rejected")
-          ? toast.error("Could not fetch Geographies count")
-          : dispatch(setGeographiesCount(response.payload));
-      }
-    );
+    await dispatch(
+      getGeographiesCountThunk({ token, companyId: user.companyId })
+    ).then((response) => {
+      response.type.includes("rejected")
+        ? toast.error("Could not fetch Geographies count")
+        : dispatch(setGeographiesCount(response.payload));
+    });
   };
 
   useEffect(() => {

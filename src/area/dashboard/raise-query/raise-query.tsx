@@ -21,7 +21,7 @@ import {
   postQueryThunk,
   setopenQueries,
 } from "./state/rasie-query.slice";
-import { tokenSelector } from "@/area/login/state/login.selector";
+import { tokenSelector, userSelector } from "@/area/login/state/login.selector";
 import { toast } from "sonner";
 import Spinner from "@/area/common/spinner";
 import { openQueriesSelector } from "./state/raise-query.selector";
@@ -38,12 +38,13 @@ function RaiseQuery() {
     useState<boolean>(false);
 
   const token = useSelector(tokenSelector);
+  const user = useSelector(userSelector);
   const openQueries = useSelector(openQueriesSelector);
 
   useEffect(() => {
     const getOpenQueries = async () => {
       setIsOpenQuriesApiLoading(true);
-      await dispatch(getOpenQueriesThunk({ token, companyId: 1 }))
+      await dispatch(getOpenQueriesThunk({ token, companyId: user.companyId }))
         .then((response) => {
           response.type.includes("rejected")
             ? toast.error("Could not fetch Open Queries")
@@ -55,7 +56,7 @@ function RaiseQuery() {
     };
 
     getOpenQueries();
-  }, [dispatch, token]);
+  }, [dispatch, token, user.companyId]);
 
   const handleQuerySubmit = async () => {
     let validData = true;
@@ -75,14 +76,16 @@ function RaiseQuery() {
         description: descriptionText,
         status: "O",
       };
-      await dispatch(postQueryThunk({ token, companyId: 1, query }))
+      await dispatch(
+        postQueryThunk({ token, companyId: user.companyId, query })
+      )
         .then((response) => {
           response.type.includes("rejected")
             ? toast.error("Error Occured while submitting your query")
             : toast.success("Query submitted successfully");
         })
         .finally(() => {
-          dispatch(getOpenQueriesThunk({ token, companyId: 1 }))
+          dispatch(getOpenQueriesThunk({ token, companyId: user.companyId }))
             .then((response) => {
               response.type.includes("rejected")
                 ? toast.error("Could not fetch Open Queries")

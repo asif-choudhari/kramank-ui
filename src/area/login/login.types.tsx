@@ -2,6 +2,8 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
+  companyId: number;
+  securityRights: string;
 };
 
 export type LoginPayload = {

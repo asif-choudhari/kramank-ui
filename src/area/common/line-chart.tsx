@@ -28,6 +28,7 @@ function LineChart({
     <MUILineChart
       width={width || getChartWidth()}
       height={height}
+      margin={{ bottom: 50 }}
       series={[{ data: yAxisData, area: showArea, showMark: showMark }]}
       xAxis={[{ scaleType: "point", data: xAxisData }]}
     />

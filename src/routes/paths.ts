@@ -1,8 +1,8 @@
 export const RoutePath = {
-  Home: "/",
+  LandingPage: "/",
   Login: "/login",
   Waitlist: "/waitlist",
-  Categories: "/categories",
+  Home: "/home",
   Products: "/products",
   ProductPage: "/product",
   DashboardHome: "/dashboard/home",

@@ -60,7 +60,7 @@ function NavBar() {
     <div className="absolute md:static bottom-0 h-16 w-full md:block md:h-auto md:w-60 p-4 flex md:flex-col items-center shadow-bottom-nav md:shadow-all-sides rounded-2xl bg-white z-50">
       <Button
         onClick={() => {
-          navigate(RoutePath.Categories);
+          navigate(RoutePath.Home);
         }}
         className="rounded-lg bg-white text-stone-900 bg-stone-900 text-white"
       >

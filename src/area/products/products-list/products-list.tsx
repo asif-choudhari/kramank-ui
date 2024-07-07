@@ -13,18 +13,18 @@ function ProductsList({ title, productItems }: ProductsListPropsType) {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full mb-10">
+    <div className="w-full mb-4">
       <div className="flex items-center">
-        <div className="text-2xl font-bold">{title}</div>
-        <hr className="hidden md:inline border-b border-slate-900 ml-4 flex-grow" />
+        <div className="text-xl font-bold">{title}</div>
+        <hr className="hidden md:inline border-b border-gray-400 ml-4 flex-grow" />
       </div>
-      <div className="flex my-4 overflow-x-auto hide-scrollbar">
+      <div className="flex gap-4 my-4 overflow-x-auto hide-scrollbar">
         {productItems.map((productItem) => (
           <Card
             onClick={() =>
               navigate(`${RoutePath.ProductPage}/${productItem.id}`)
             }
-            className=" mx-2 mb-1 h-52 w-48 rounded-xl shadow-md flex flex-col items-center justify-around"
+            className="mb-1 h-52 w-48 rounded-xl shadow-md flex flex-col items-center justify-around"
           >
             <img
               src={productItem.image}
@@ -36,7 +36,7 @@ function ProductsList({ title, productItems }: ProductsListPropsType) {
         ))}
       </div>
       <div className="flex justify-center mt-4">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center cursor-pointer">
           <ChevronDown />
           <span>Expand</span>
         </div>

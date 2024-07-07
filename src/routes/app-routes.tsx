@@ -20,7 +20,7 @@ function AppRoutes() {
       <Route path="login" Component={Login} />
       <Route path="waitlist" Component={Waitlist} />
       <Route element={<PrivateRoute />}>
-        <Route path="categories" element={<Products />} />
+        <Route path="home" element={<Products />} />
         <Route path="product/:id" element={<ProductPage />} />
         <Route path="dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />

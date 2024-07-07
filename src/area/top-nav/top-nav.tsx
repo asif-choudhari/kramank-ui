@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import logo from "@/assets/logo-no-bg.png";
+import logo from "@/assets/kramank-short-logo.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import {
@@ -100,7 +100,9 @@ function TopNav() {
 
   const handleLogout = () => {
     dispatch(resetLoginSlice());
-    navigate(RoutePath.Login);
+    setTimeout(() => {
+      navigate(RoutePath.Login);
+    }, 1);
   };
 
   useEffect(() => {
@@ -124,8 +126,8 @@ function TopNav() {
 
   return (
     <div className="h-16 px-4 mb-2 flex items-center justify-between rounded-2xl bg-white shadow-all-sides">
-      <div className="w-48 cursor-pointer hidden sm:block">
-        <img src={logo} alt="logo" />
+      <div className="w-48 cursor-pointer">
+        <img src={logo} alt="logo" className="h-16 w-16" />
       </div>
       <div className="relative w-full max-w-[300px]">
         <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />

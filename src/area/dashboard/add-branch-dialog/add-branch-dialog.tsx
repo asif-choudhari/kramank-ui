@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/store";
-import { tokenSelector } from "@/area/login/state/login.selector";
+import { tokenSelector, userSelector } from "@/area/login/state/login.selector";
 import { getAdminListThunk } from "../admin-branch/state/admin-branch.slice";
 import { toast } from "sonner";
 import {
@@ -50,24 +50,27 @@ function AddBranchDialog({
   const [selectedAdmin, setSelectedAdmin] = useState<string>("");
 
   const token = useSelector(tokenSelector);
+  const user = useSelector(userSelector);
   const adminList = useSelector(adminListSelector);
 
   useEffect(() => {
     if (!isNewAdmin) {
-      dispatch(getAdminListThunk({ token, companyId: 1 })).then((response) => {
-        response.type.includes("rejected")
-          ? toast.error("Could not fetch Admin List")
-          : dispatch(setAdminList(response.payload));
-      });
+      dispatch(getAdminListThunk({ token, companyId: user.companyId })).then(
+        (response) => {
+          response.type.includes("rejected")
+            ? toast.error("Could not fetch Admin List")
+            : dispatch(setAdminList(response.payload));
+        }
+      );
     }
-  }, [dispatch, token, isNewAdmin]);
+  }, [dispatch, token, isNewAdmin, user.companyId]);
 
   const handleAddBranch = () => {
     const addNewBranch = async () => {
       await dispatch(
         AddNewBranchThunk({
           token,
-          companyId: 1,
+          companyId: user.companyId,
           branchName,
           isNewAdmin,
           adminUserId: Number(selectedAdmin),
@@ -117,8 +120,16 @@ function AddBranchDialog({
         toast.error("Invalid admin email");
         valid = false;
       }
+      if (adminEmail.includes("@gmail.com")) {
+        toast.warning("Use valid business email");
+        valid = false;
+      }
       if (!adminMobile) {
         toast.error("Invalid admin mobile");
+        valid = false;
+      }
+      if (adminMobile.length != 10) {
+        toast.warning("Make sure Mobile number is 10 digits");
         valid = false;
       }
     } else {
@@ -143,7 +154,7 @@ function AddBranchDialog({
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-      <DialogContent>
+      <DialogContent className="max-h-[calc(100dvh-100px)] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add New Branch</DialogTitle>
         </DialogHeader>
@@ -159,7 +170,7 @@ function AddBranchDialog({
             }
           />
         </div>
-        <div>
+        <div className="flex items-center">
           <Checkbox
             id="newAdmin"
             name="newAdmin"
