@@ -4,9 +4,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 function Products() {
   return (
-    <div className="h-[calc(100dvh-100px)] p-5 overflow-y-auto">
-      <Tabs defaultValue="products" className="">
-        <TabsList>
+    <div className="h-[calc(100dvh-106px)] my-4 p-5 overflow-y-auto bg-white rounded-lg shadow-all-sides">
+      <Tabs defaultValue="products">
+        <TabsList className="tab-list">
           <TabsTrigger value="products">Products</TabsTrigger>
           <TabsTrigger value="services">Services</TabsTrigger>
         </TabsList>

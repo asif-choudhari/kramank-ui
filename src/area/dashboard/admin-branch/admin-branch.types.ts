@@ -5,6 +5,7 @@ export type AdminType = {
   firstName: string;
   lastName: string;
   email: string;
+  mobile: string;
 };
 
 export type BranchType = {

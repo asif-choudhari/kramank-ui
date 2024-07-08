@@ -77,6 +77,7 @@ type AdminBranchState = {
   adminList: AdminType[];
   isAdminListApiLoading: boolean;
   isAdminListApiError: string;
+  branchList: BranchType[];
 };
 
 const initialState: AdminBranchState = {
@@ -92,12 +93,17 @@ const initialState: AdminBranchState = {
   adminList: [],
   isAdminListApiLoading: false,
   isAdminListApiError: "",
+  branchList: [],
 };
 
 const adminBranchSlice = createSlice({
   name: "adminBranchSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setBranchList: (state, action) => {
+      state.branchList = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAdminCountThunk.pending, (state) => {
@@ -151,5 +157,7 @@ const adminBranchSlice = createSlice({
       });
   },
 });
+
+export const { setBranchList } = adminBranchSlice.actions;
 
 export default adminBranchSlice.reducer;

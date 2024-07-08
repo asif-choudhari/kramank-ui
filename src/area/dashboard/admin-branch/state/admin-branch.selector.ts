@@ -35,3 +35,6 @@ export const isAdminListApiLoadingSelector = (state: RootState) =>
 
 export const isAdminListApiErrorSelector = (state: RootState) =>
   state.adminBranch.isAdminListApiError;
+
+export const branchListSelector = (state: RootState) =>
+  state.adminBranch.branchList;

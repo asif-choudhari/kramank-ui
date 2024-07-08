@@ -3,6 +3,7 @@ import { ProductItem } from "../products.types";
 import { ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { RoutePath } from "@/routes/paths";
+import foodImage from "@/assets/food.png";
 
 type ProductsListPropsType = {
   title: string;
@@ -16,22 +17,23 @@ function ProductsList({ title, productItems }: ProductsListPropsType) {
     <div className="w-full mb-4">
       <div className="flex items-center">
         <div className="text-xl font-bold">{title}</div>
-        <hr className="hidden md:inline border-b border-gray-400 ml-4 flex-grow" />
+        <hr className="hidden md:inline border-b border-slate-200 ml-4 flex-grow" />
       </div>
-      <div className="flex gap-4 my-4 overflow-x-auto hide-scrollbar">
+      <div className="grid gap-4 my-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
         {productItems.map((productItem) => (
           <Card
+            key={productItem.id}
             onClick={() =>
               navigate(`${RoutePath.ProductPage}/${productItem.id}`)
             }
-            className="mb-1 h-52 w-48 rounded-xl shadow-md flex flex-col items-center justify-around"
+            className="p-2 rounded-xl shadow-all-sides bg-yellow-400 flex flex-col items-center justify-around"
           >
             <img
-              src={productItem.image}
+              src={foodImage}
               alt={productItem.name}
-              className="h-40 w-44 rounded-lg"
+              className="rounded-lg"
             />
-            <div className="font-bold">{productItem.name}</div>
+            <div className="mt-4 font-bold">{productItem.name}</div>
           </Card>
         ))}
       </div>

@@ -100,3 +100,8 @@ body {
 ::-webkit-scrollbar-button {
   display: none;
 }
+
+.tab-list {
+  background-color: black;
+  color: yellow;
+}
