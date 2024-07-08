@@ -26,7 +26,7 @@ function ProductsList({ title, productItems }: ProductsListPropsType) {
             onClick={() =>
               navigate(`${RoutePath.ProductPage}/${productItem.id}`)
             }
-            className="p-2 rounded-xl shadow-all-sides bg-yellow-400 flex flex-col items-center justify-around"
+            className="p-2 rounded-xl shadow-all-sides bg-black text-amber-200 flex flex-col items-center justify-around"
           >
             <img
               src={foodImage}
