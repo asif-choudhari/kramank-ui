@@ -1,5 +1,8 @@
 export const RoutePath = {
   LandingPage: "/",
+  PrivacyPolicy: "/privacy-policy",
+  ReturnPolicy: "/return-policy",
+  TermsAndConditions: "/terms-and-conditions",
   Login: "/login",
   Waitlist: "/waitlist",
   Home: "/home",

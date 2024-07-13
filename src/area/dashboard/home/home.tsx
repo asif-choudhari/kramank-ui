@@ -38,7 +38,7 @@ const getChartWidth = (): number => {
   return 300;
 };
 
-function Home() {
+function DashboardHome() {
   const dispatch = useDispatch<AppDispatch>();
 
   const rankData = [
@@ -192,4 +192,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default DashboardHome;
