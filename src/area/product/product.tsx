@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   getProductDetailsApi,
   getProductOptionsApi,
   getProductImagesApi,
+  getProductFeedbackApi,
+  addFeedbackApi,
 } from "./product.api";
 import { useSelector } from "react-redux";
 import { tokenSelector } from "../login/state/login.selector";
@@ -14,6 +16,7 @@ import {
   ProductOptionsType,
   ProductDetailsType,
   ProductImageType,
+  ProductFeedbackType,
 } from "./product.types";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -143,13 +146,44 @@ const StarRating: React.FC<StarRatingPropsType> = ({
   );
 };
 
-const FeedbackCard = () => {
+type FeedbackCardPropsType = {
+  feedbacks: ProductFeedbackType[];
+  productId: number;
+};
+
+const FeedbackCard: React.FC<FeedbackCardPropsType> = ({
+  feedbacks,
+  productId,
+}) => {
   const [rating, setRating] = useState<number>(0);
   const [titleText, setTitleText] = useState<string>("");
   const [descriptionText, setDescriptionText] = useState<string>("");
 
+  const token = useSelector(tokenSelector);
+
+  // Function to post feedback
+  const postFeedback = async () => {
+    if (titleText.length == 0) {
+      toast.error("Title cannot be empty");
+      return;
+    }
+    if (descriptionText.length == 0) {
+      toast.error("Desctiption cannot be empty");
+      return;
+    }
+
+    await addFeedbackApi(token, productId, rating, titleText, descriptionText)
+      .then(() => {
+        toast.success("Posted successfully");
+        setRating(0);
+        setTitleText("");
+        setDescriptionText("");
+      })
+      .catch(() => toast.error("Error posting feedback"));
+  };
+
   return (
-    <div className="rounded-lg shadow-lg p-6 bg-white">
+    <div className="rounded-lg shadow-lg p-6 bg-white md:overflow-y-auto hide-scrollbar">
       <div className="font-bold text-xl text-gray-800 mb-4">
         Submit Feedback
       </div>
@@ -174,14 +208,27 @@ const FeedbackCard = () => {
         />
       </div>
       <div className="text-center mb-6">
-        <Button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+        <Button
+          className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+          onClick={postFeedback}
+        >
           Post Feedback
         </Button>
       </div>
       <div className="font-bold text-xl text-gray-800 mb-2">
         Customer Feedbacks
       </div>
-      {/* Add code to display feedbacks here */}
+      <div className="flex flex-col gap-4">
+        {feedbacks.map((feedback) => (
+          <div key={feedback.feedbackId} className="border rounded-lg p-4">
+            <div className="font-bold text-lg">{feedback.title}</div>
+            <StarRating rating={feedback.rating} />
+            <div className="text-sm my-2 text-gray-600">
+              {feedback.description}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -250,6 +297,7 @@ const ProductPage = () => {
   });
   const [options, setOptions] = useState<ProductOptionsType[]>([]);
   const [images, setImages] = useState<ProductImageType[]>([]);
+  const [feedbacks, setFeedbacks] = useState<ProductFeedbackType[]>([]);
 
   const token = useSelector(tokenSelector);
 
@@ -271,10 +319,17 @@ const ProductPage = () => {
       .catch(() => toast.error("Could not fetch Product Images"));
   };
 
+  const getProductFeedback = async () => {
+    await getProductFeedbackApi(token, productId)
+      .then((response) => setFeedbacks(response))
+      .catch(() => toast.error("Could not fetch Feedback"));
+  };
+
   useEffect(() => {
     getProductDetails();
     getProductOptions();
     getProductImages();
+    getProductFeedback();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -282,7 +337,7 @@ const ProductPage = () => {
     <div className="mx-auto h-[calc(100dvh-90px)] py-2 grid grid-cols-1 md:grid-cols-3 gap-4 overflow-y-auto">
       <OptionsCard options={options} />
       <ProductCard product={product} images={images} />
-      <FeedbackCard />
+      <FeedbackCard feedbacks={feedbacks} productId={productId} />
     </div>
   );
 };

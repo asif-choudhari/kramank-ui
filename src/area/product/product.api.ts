@@ -34,3 +34,39 @@ export const getProductImagesApi = async (token: string, productId: number) => {
   });
   return data;
 };
+
+export const getProductFeedbackApi = async (
+  token: string,
+  productId: number
+) => {
+  const { data } = await axios.get(`${url}/get-product-feedback/${productId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return data;
+};
+
+export const addFeedbackApi = async (
+  token: string,
+  productId: number,
+  rating: number,
+  title: string,
+  description: string
+) => {
+  const { data } = await axios.post(
+    `${url}/insert-product-feedback`,
+    {
+      productId,
+      rating,
+      title,
+      description,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return data;
+};

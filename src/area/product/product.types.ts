@@ -15,3 +15,10 @@ export type ProductImageType = {
   productImageId: number;
   image: string;
 };
+
+export type ProductFeedbackType = {
+  feedbackId: number;
+  title: string;
+  description: string;
+  rating: number;
+};
