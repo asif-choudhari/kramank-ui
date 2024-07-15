@@ -1,17 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginReducer from "@/area/login/state/login.slice";
-import adminBranchReducer from "@/area/dashboard/admin-branch/state/admin-branch.slice";
-import rasieQueryReducer from "@/area/dashboard/raise-query/state/rasie-query.slice";
-import addBranchDialogReducer from "@/area/dashboard/add-branch-dialog/state/add-branch-dialog.slice";
-import homeReducer from "./area/dashboard/home/state/home.slice";
+import loginSlice from "@/area/login/state/login.slice";
+import adminBranchSlice from "@/area/dashboard/admin-branch/state/admin-branch.slice";
+import rasieQuerySlice from "@/area/dashboard/raise-query/state/rasie-query.slice";
+import addBranchDialogSlice from "@/area/dashboard/add-branch-dialog/state/add-branch-dialog.slice";
+import homeSlice from "./area/dashboard/home/state/home.slice";
+import productsSlice from "./area/products/state/products.slice";
 
 const store = configureStore({
   reducer: {
-    login: loginReducer,
-    adminBranch: adminBranchReducer,
-    rasieQuery: rasieQueryReducer,
-    addBranchDialog: addBranchDialogReducer,
-    home: homeReducer,
+    login: loginSlice,
+    adminBranch: adminBranchSlice,
+    rasieQuery: rasieQuerySlice,
+    addBranchDialog: addBranchDialogSlice,
+    home: homeSlice,
+    prodcuts: productsSlice,
   },
 });
 

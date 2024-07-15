@@ -3,3 +3,9 @@ export type ProductItem = {
   name: string;
   image: string;
 };
+
+export type ProductListItem = {
+  categoryId: number;
+  categoryName: string;
+  productItems: ProductItem[];
+};

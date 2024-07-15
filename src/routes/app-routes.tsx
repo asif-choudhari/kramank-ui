@@ -10,16 +10,18 @@ import Invoice from "@/area/dashboard/invoice/invoice";
 import RaiseQuery from "@/area/dashboard/raise-query/raise-query";
 import PrivateRoute from "./private-route";
 import Waitlist from "@/area/waitlist/waitlist";
-import Products from "@/area/products/products-services";
+import ProductsServices from "@/area/products/products-services";
 import ProductPage from "@/area/product/product";
 import Home from "@/area/landing-page/home";
 import TermsConditions from "@/area/landing-page/terms-conditions";
 import PrivacyPolicy from "@/area/landing-page/privacy-policy";
 import ReturnPolicy from "@/area/landing-page/return-policy";
+import ProductImageUpload from "@/area/products/image-upload";
 
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="image-upload" Component={ProductImageUpload} />
       <Route path="" Component={LandingPage}>
         <Route path="" Component={Home} />
         <Route path="privacy-policy" Component={PrivacyPolicy} />
@@ -29,7 +31,7 @@ function AppRoutes() {
       <Route path="login" Component={Login} />
       <Route path="waitlist" Component={Waitlist} />
       <Route Component={PrivateRoute}>
-        <Route path="home" Component={Products} />
+        <Route path="home" Component={ProductsServices} />
         <Route path="product/:id" Component={ProductPage} />
         <Route path="dashboard" Component={Dashboard}>
           <Route path="home" Component={DashboardHome} />
