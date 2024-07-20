@@ -85,17 +85,6 @@ function PrivacyPolicy() {
             have accepted the changes by continuing to use our website.
           </li>
         </li>
-        <li className="my-4">
-          <b>8. Contact Information</b>
-          <li className="ml-4">
-            For any questions or concerns regarding our privacy policy, please
-            contact us at:
-          </li>
-          <li className="my-2 ml-4">&#8226; Email: support@kramank.com</li>
-          <li className="my-2 ml-4">
-            &#8226; Phone: [Insert Contact Phone Number]
-          </li>
-        </li>
       </ol>
     </div>
   );

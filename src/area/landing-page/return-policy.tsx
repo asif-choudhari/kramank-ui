@@ -52,18 +52,6 @@ function ReturnPolicy() {
             manufacturer's return policy.
           </li>
         </li>
-        <li className="my-4">
-          <b>5. Contact Information</b>
-          <br />
-          <li className="ml-4">
-            For any questions or concerns regarding our privacy policy, please
-            contact us at:
-          </li>
-          <li className="my-2 ml-4">&#8226; Email: support@kramank.com</li>
-          <li className="my-2 ml-4">
-            &#8226; Phone: [Insert Contact Phone Number]
-          </li>
-        </li>
       </ol>
     </div>
   );

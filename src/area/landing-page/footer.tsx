@@ -28,7 +28,14 @@ function Footer() {
             </span>
           </div>
         </div>
-        <div className="pt-10 sm: pt-3 text-xl font-bold flex flex-col items-center sm:items-start">
+        <div className="sm:hidden my-5 bg-stone-300 w-full h-1 rounded-sm" />
+        <div className="px-5 my-2 flex flex-col flex-wrap gap-2">
+          <Link to={RoutePath.About}>About</Link>
+          <Link to={RoutePath.PrivacyPolicy}>Privacy Policy</Link>
+          <Link to={RoutePath.ReturnPolicy}>Return Policy</Link>
+          <Link to={RoutePath.TermsAndConditions}>Terms and Conditions</Link>
+        </div>
+        <div className="pt-10 sm:pt-3 text-xl font-bold flex flex-col items-center sm:items-start">
           Follow us on
           <span className="pt-2 flex justify-center sm:block">
             {followItems.map((item) => (
@@ -46,11 +53,6 @@ function Footer() {
             ))}
           </span>
         </div>
-      </div>
-      <div className="my-2 flex flex-wrap gap-2">
-        <Link to={RoutePath.PrivacyPolicy}>Privacy Policy</Link> |
-        <Link to={RoutePath.ReturnPolicy}>Return Policy</Link>|
-        <Link to={RoutePath.TermsAndConditions}>Terms and Conditions</Link>
       </div>
       <div>Copyright &copy; All Rights Reserved</div>
     </div>

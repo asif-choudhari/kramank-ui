@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import logo from "@/assets/kramank-short-logo.png";
+import shortLogo from "@/assets/kramank-short-logo.png";
+import logo from "@/assets/logo-no-bg.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import {
@@ -126,11 +127,17 @@ function TopNav() {
 
   return (
     <div className="h-16 px-4 mb-2 flex items-center justify-between rounded-2xl bg-white shadow-all-sides">
-      <div className="w-48 cursor-pointer">
+      <div className="w-48 flex cursor-pointer">
+        <img
+          src={shortLogo}
+          alt="logo"
+          className="h-16 w-16 cursor-pointer"
+          onClick={() => navigate(-1)}
+        />
         <img
           src={logo}
           alt="logo"
-          className="h-16 w-16 cursor-pointer"
+          className="hidden lg:block h-16 w-48 cursor-pointer"
           onClick={() => navigate(-1)}
         />
       </div>

@@ -17,6 +17,7 @@ import TermsConditions from "@/area/landing-page/terms-conditions";
 import PrivacyPolicy from "@/area/landing-page/privacy-policy";
 import ReturnPolicy from "@/area/landing-page/return-policy";
 import ProductImageUpload from "@/area/products/image-upload";
+import About from "@/area/landing-page/about";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
       <Route path="image-upload" Component={ProductImageUpload} />
       <Route path="" Component={LandingPage}>
         <Route path="" Component={Home} />
+        <Route path="about" Component={About} />
         <Route path="privacy-policy" Component={PrivacyPolicy} />
         <Route path="return-policy" Component={ReturnPolicy} />
         <Route path="terms-and-conditions" Component={TermsConditions} />
