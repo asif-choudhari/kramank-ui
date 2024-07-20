@@ -38,7 +38,7 @@ const ProductsList: React.FC<ProductsListPropsType> = ({
                 alt={productItem.name}
                 className="h-60 w-full object-cover bg-white text-black"
               />
-              <div className="p-4 bg-black text-yellow-400">
+              <div className="p-4 bg-black text-yellow-400 text-center">
                 <h3 className="text-lg font-semibold">{productItem.name}</h3>
               </div>
             </Card>

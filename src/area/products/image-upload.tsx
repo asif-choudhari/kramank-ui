@@ -18,14 +18,14 @@ const ProductImageUpload = () => {
     }
 
     const formData = new FormData();
-    formData.append("productId", productId); // Ensure this matches with your server-side req.body field name
+    formData.append("productId", productId);
     images.forEach((image) => {
-      formData.append(`images`, image); // Ensure 'images' matches with your multer.array('images') configuration
+      formData.append(`images`, image);
     });
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/upload-product-images",
+        `${import.meta.env.VITE_API_URL}/upload-product-images`,
         formData,
         {
           headers: {
@@ -33,9 +33,8 @@ const ProductImageUpload = () => {
           },
         }
       );
-      console.log(response.data); // Success message from server
+      console.log(response.data);
       alert("Product images uploaded successfully!");
-      // Additional logic after successful upload
     } catch (error) {
       console.error("Error uploading product images:", error);
       alert("Failed to upload product images.");
