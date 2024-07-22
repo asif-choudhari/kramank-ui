@@ -29,11 +29,14 @@ function Footer() {
           </div>
         </div>
         <div className="sm:hidden my-5 bg-stone-300 w-full h-1 rounded-sm" />
-        <div className="px-5 my-2 flex flex-col flex-wrap gap-2">
-          <Link to={RoutePath.About}>About</Link>
-          <Link to={RoutePath.PrivacyPolicy}>Privacy Policy</Link>
-          <Link to={RoutePath.ReturnPolicy}>Return Policy</Link>
-          <Link to={RoutePath.TermsAndConditions}>Terms and Conditions</Link>
+        <div className="pt-10 sm:pt-3 text-xl font-bold flex flex-col items-center sm:items-start">
+          Links
+          <span className="pt-2 text-base font-normal flex flex-col justify-center">
+            <Link to={RoutePath.About}>About</Link>
+            <Link to={RoutePath.PrivacyPolicy}>Privacy Policy</Link>
+            <Link to={RoutePath.ReturnPolicy}>Return Policy</Link>
+            <Link to={RoutePath.TermsAndConditions}>Terms and Conditions</Link>
+          </span>
         </div>
         <div className="pt-10 sm:pt-3 text-xl font-bold flex flex-col items-center sm:items-start">
           Follow us on
@@ -42,7 +45,7 @@ function Footer() {
               <Link
                 to={item.link}
                 key={item.id}
-                className="my-2 flex items-center cursor-pointer"
+                className="my-2 flex items-center"
               >
                 <img src={item.image} alt={item.name} className="h-5 mx-2" />
 

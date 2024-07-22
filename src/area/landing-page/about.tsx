@@ -1,6 +1,6 @@
 function About() {
   return (
-    <div className="mt-24 mb-20 mx-4">
+    <div className="sm:w-96 flex flex-col mt-24 mb-20 mx-4 sm:mx-auto">
       <h1 className="text-2xl font-bold">About Us</h1>
       <div className="my-4">
         At Kramank, we are building of a kind , single vendor solution for
